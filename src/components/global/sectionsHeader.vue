@@ -18,7 +18,8 @@ export default {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        margin-top: 6.5rem;
+        margin-top: $navHight;
+        padding-top:1rem;
 
     h1{
         color: $primeColor;

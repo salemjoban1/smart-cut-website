@@ -4,18 +4,23 @@
     margin:0;
     box-sizing: border-box;
     direction: rtl;
-    background-color:rgb(182, 182, 182);
     font-family: Helvetica ,Arial, sans-serif;
+}
+body{
+    background-color:rgb(182, 182, 182);
 }
 ul{
     list-style-type: none;
+}
+a{
+    text-decoration: none;
 }
 
 //variables 
 $primeColor:#1947BA;
 $secondColor:#FFB547;
 $toggleColor:rgb(126, 112, 202);
-$navHight:3.5rem;
+$navHight:5.5rem;
 
 //mixin
 @mixin transition-ease{

@@ -7,12 +7,12 @@
                 <span :class="{active:isSelected}"></span>
             </div>
             <ul class="nav-menu" :class="{active:isSelected}">
-                <li>الرئيسية</li>
-                <li>من نحن</li>
-                <li>الخدمات</li>
-                <li>أعمالنا</li>
-                <li>عملائنا</li>
-                <li>تواصل معنا</li>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#about-us">من نحن</a></li>
+                <li><a href="#about-us">الخدمات</a></li>
+                <li><a href="#about-us">أعمالنا</a></li>
+                <li><a href="#about-us">عملائنا</a></li>
+                <li><a href="#about-us">تواصل معنا</a></li>
                 
             </ul>
             <div class="logo"><img src="../../assets/logo.png"></div>
@@ -38,17 +38,18 @@ export default({
     .navBar{
         position: fixed;
         top:0;
-        z-index:10;
+        // z-index:10;
         background-color:#fff;
         box-shadow: 2px 2px 5px rgb(209, 209, 208);
         width:100%;
         padding:1rem;
-        height:$navHight+2rem;
+        height:$navHight;
         .inner-width{
             display:flex;
             justify-content: space-between;
             align-items: center;
             .menu-toggle{
+                transform:rotate(360deg);
                 display:block;
                 position: absolute;
                 top:32%;
@@ -68,13 +69,16 @@ export default({
                     margin-top:5px;
                     width:30px;
                     &:nth-child(1){
-                        width:10px;
+                        width:28px;
+                        @include transition-ease;
                     }    
                     &:nth-child(2){
-                        width:28px;
+                        width:20px;
+                        @include transition-ease;
                     }
                     &:nth-child(3){
-                        width:10px;
+                        width:28px;
+                        @include transition-ease;
                     }
                     &:nth-child(1).active{
                         width:28px;
@@ -106,16 +110,19 @@ export default({
             left: 1rem;
            img{
                width:12rem;
-               height: $navHight;
+               height: $navHight - 2rem;
            }
         }
         .nav-menu{
             display: none;
             // max-width:70%;
             padding:1rem 2rem;
-            & li{
+            li{
                 display:inline-block;
                 margin-left:1.5rem;
+                a{
+                    color:$primeColor;
+                }
             }
             &.active{
                 display: flex;
@@ -123,7 +130,7 @@ export default({
                 justify-content: center;
                 align-items: center;
                 position: absolute;
-                top:$navHight + 2rem;
+                top:$navHight;
                 right:0;
                 height: 100vh;
                 width:100vw;
