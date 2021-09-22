@@ -1,12 +1,12 @@
 <template>
     <div class="navBar">
         <div class="inner-width">
-            <div class="menu-toggle" :class="{active:isSelected}"  @click="isSelected=!isSelected">
+            <div class="menu-toggle d-md-none" :class="{active:isSelected}"  @click="isSelected=!isSelected">
                 <span :class="{active:isSelected}" ></span>
                 <span :class="{active:isSelected}"></span>
                 <span :class="{active:isSelected}"></span>
             </div>
-            <ul class="nav-menu" :class="{active:isSelected}">
+            <ul class="nav-menu d-md-flex" :class="{active:isSelected}">
                 <li><a href="#">الرئيسية</a></li>
                 <li><a href="#about-us">من نحن</a></li>
                 <li><a href="#about-us">الخدمات</a></li>
@@ -28,9 +28,6 @@ export default({
             isHover:false
         }
     },
-    components:{
-        
-    }
 })
 </script>
 <style lang="scss" scoped >
@@ -101,8 +98,7 @@ export default({
                     @include transition-ease;
                 }       
             }
-        }
-        .logo{
+            .logo{
             padding-left:1rem;
             position: absolute;
             background-color:#fff;
@@ -121,7 +117,7 @@ export default({
                 display:inline-block;
                 margin-left:1.5rem;
                 a{
-                    color:$primeColor;
+                    color:#fff;
                 }
             }
             &.active{
@@ -136,6 +132,7 @@ export default({
                 width:100vw;
                 background-color:#fff;
                 opacity:0.89;
+                transform:translatey(0);
                 overflow: hidden;
                 @include transition-ease;
                 & li{
@@ -143,13 +140,20 @@ export default({
                 }
             }
         }
+        // @media screen and (max-width:768px) {
+        // // body{
+        // //     width:0px;
+        // // }
+        //     .menu-toggle{
+        //         display:block;
+        //     }
+        //     .nav-menu{
+        //         display: none;
+        //         transform:translatey(-100%);
+        //     }
+        // }
     }
-    @media screen and (max-width:700px) {
-        .menu-toggle{
-                display:block;
-        }
-        .nav-menu{
-            display: none;
-        }
+        
     }
+    
 </style>

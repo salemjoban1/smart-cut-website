@@ -1,13 +1,14 @@
 <template>
     <header class="main-headers">
-                <h1 >من نحن</h1>
+                <h1 >{{header}}</h1>
                 <span class="under-line"></span>
     </header>
 </template>
 
 <script>
 export default {
-
+    name:"main-headers",
+    props:['header']
 }
 </script>
 
