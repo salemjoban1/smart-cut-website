@@ -9,7 +9,7 @@
             <ul class="nav-menu d-md-flex" :class="{active:isSelected}">
                 <li><a href="#">الرئيسية</a></li>
                 <li><a href="#about-us">من نحن</a></li>
-                <li><a href="#about-us">الخدمات</a></li>
+                <li><a href="#our-services">الخدمات</a></li>
                 <li><a href="#about-us">أعمالنا</a></li>
                 <li><a href="#about-us">عملائنا</a></li>
                 <li><a href="#about-us">تواصل معنا</a></li>
@@ -35,7 +35,7 @@ export default({
     .navBar{
         position: fixed;
         top:0;
-        // z-index:10;
+        z-index:3;
         background-color:#fff;
         box-shadow: 2px 2px 5px rgb(209, 209, 208);
         width:100%;

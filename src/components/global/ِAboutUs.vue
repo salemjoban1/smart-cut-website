@@ -1,16 +1,28 @@
 <template>
+<!-- problems:
+1->text formating
+2->reverse order in mobile view
+3->computd function issue 'read more'
+4-> about-us hieght -->
         <section class="about-us">
             <div class="container">
-            <div class="row">
-                <div class="description col-sm-12 col-md-6">
-                    <h3>{{text}}</h3>
+                <div class="row justify-content-evenly">
+                     <div class="pictures p-4 col-sm-12 col-md-6 ">
+                         <div class="inner-border">
+                            <img class="ceo-img" src="../../assets/personal-pic.png">
+                            <div class="descrip">
+                                <h3>عبد الرحمن جوبان</h3>
+                                <p>منتح ومخرج</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description p-4 col-sm-12 col-md-6 ">
+                        <p>
+                            {{text}}
+                        </p>
+                        <span class="read-more" @click="fitTextPlace()">انقر للمزيد</span>
+                    </div>
                 </div>
-                <div class="pictures col-sm-12 col-md-6 ">
-                    <img class="big-right-side" src="../../assets/big-right-side.png">
-                    <img class="up-left-side" src="../../assets/up-left-side.png">
-                    <img class="down-left-side" src="../../assets/down-left-side.png">
-                </div>
-            </div>
               </div>
         </section>
   
@@ -22,45 +34,60 @@ export default {
     props:['text'],
     data(){
         return{
-            // text:"sdfda"
+            fit:false
+        }
+    },
+    methods:{
+        // error
+        fitTextPlace:function(){
+            let description = document.querySelector('.about-us .description');
+            let fullHieght = description.style.clientHeight;
+            console.log(fullHieght);
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../../scss/main.scss';
     .about-us{
-        // display:flex;
-        // justify-content: space-between;
-        // align-items:center;
-        // padding:2rem 0;
-        // width:1140px;
-        // margin:0 auto;
-        overflow: hidden;
         .description{
-            // width:50%;
-        h3{
-            text-align: right;
-            font-size:20px;
-            line-height: 1.8;
-            text-align: justify;
-        }
+            display:flex;
+            flex-direction: column;
+            p{
+                text-align: right;
+                font-size:20px;
+                line-height: 1.8;
+                text-align: justify;
+            }
+            .read-more{
+                align-self: flex-end;
+                color:#012c97;
+                font-size:1.2rem;
+                font-weight: bold;
+            }
+            
         }
         .pictures{
-            // width:45%;
-            display:grid;
-            grid-template-columns: 50% 50%;
-            grid-template-rows:50% 50% ;
-            gap:20px 20px;
-
-            img{
-                // width:100%;
-                // height: 100%;
-                
+            
+            padding:0;
+            .inner-border{
+                border:3px solid $primeColor;
+                .descrip{
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width:100%;
+                    padding:0.5rem 0;
+                    background-color:$primeColor;
+                    color:#FFF;
+                }
+                img{
+                width:100%;   
+                }
             }
-            .big-right-side{
-                grid-row:1/span2;
-            }
+            
         }
     }
 </style>

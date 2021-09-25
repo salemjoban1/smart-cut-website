@@ -20,7 +20,7 @@ export default {
         align-items: center;
         flex-direction: column;
         margin-top: $navHight;
-        padding-top:1rem;
+        padding:1rem;
 
     h1{
         color: $primeColor;
