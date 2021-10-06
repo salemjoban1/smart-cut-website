@@ -1,21 +1,23 @@
 <template>
     <div class="navBar">
         <div class="inner-width">
-            <div class="menu-toggle d-md-none" :class="{active:isSelected}"  @click="isSelected=!isSelected">
+            <div class="menu-toggle d-md-none" :class="{active:isSelected}"  @click="isSelected=!isSelected,isFullMenu=!isFullMenu">
                 <span :class="{active:isSelected}" ></span>
                 <span :class="{active:isSelected}"></span>
                 <span :class="{active:isSelected}"></span>
             </div>
             <ul class="nav-menu d-md-flex" :class="{active:isSelected}">
-                <li><a href="#">الرئيسية</a></li>
-                <li><a href="#about-us">من نحن</a></li>
-                <li><a href="#our-services">الخدمات</a></li>
-                <li><a href="#about-us">أعمالنا</a></li>
-                <li><a href="#about-us">عملائنا</a></li>
-                <li><a href="#about-us">تواصل معنا</a></li>
+                <li><a href="#" @click="hideOnClick">الرئيسية</a></li>
+                <li><a href="#about-us" @click="hideOnClick">من نحن</a></li>
+                <li><a href="#services" @click="hideOnClick">الخدمات</a></li>
+                <li><a href="#about-us" @click="hideOnClick">أعمالنا</a></li>
+                <li><a href="#about-us" @click="hideOnClick">عملائنا</a></li>
+                <li><a href="#contact" @click="hideOnClick">تواصل معنا</a></li>
                 
             </ul>
-            <div class="logo"><img src="../../assets/logo.png"></div>
+            <div class="logo">
+                <a href="#"><img src="../../assets/logo.png"></a>
+            </div>
         </div>
     </div>
 </template>
@@ -25,9 +27,23 @@ export default({
     data(){
         return{
             isSelected:false,
-            isHover:false
+            isHide:false,
+            isFullMenu:false
         }
     },
+    beforeUpdate() {
+        if(window.innerWidth <= 768){
+        this.isHide= true;
+        }
+
+    },
+    methods:{
+        hideOnClick:function(){
+            if (this.isSelected === true){
+                this.isSelected=!this.isSelected
+            }
+        }
+    }
 })
 </script>
 <style lang="scss" scoped >
@@ -46,6 +62,7 @@ export default({
             justify-content: space-between;
             align-items: center;
             .menu-toggle{
+                z-index:4;
                 transform:rotate(360deg);
                 display:block;
                 position: absolute;
@@ -58,9 +75,6 @@ export default({
                 // background-color: #000;
                 span{
                     display: flex;
-                    // position: relative;
-                    // top:0;
-                    // left:0;
                     height: 3px;
                     background-color: $primeColor;
                     margin-top:5px;
@@ -99,28 +113,33 @@ export default({
                 }       
             }
             .logo{
-            padding-left:1rem;
-            position: absolute;
-            background-color:#fff;
-            top:1rem;
-            left: 1rem;
-           img{
-               width:12rem;
-               height: $navHight - 2rem;
-           }
-        }
+                padding-left:1rem;
+                position: absolute;
+                background-color:#fff;
+                top:1rem;
+                left: 1rem;
+                img{
+                    width:12rem;
+                    height: $navHight - 2rem;
+                }
+            }
         .nav-menu{
             display: none;
-            // max-width:70%;
             padding:1rem 2rem;
             li{
-                display:inline-block;
                 margin-left:1.5rem;
                 a{
-                    color:#fff;
+                    color:$primeColor;
+                    font-size:1.2rem;
+                   &:hover,&:active{
+                        color:$secondColor;
+                        @include transition-ease;
+                    }
                 }
             }
             &.active{
+                animation-name:movmentIn;
+                animation-duration: 0.3s;
                 display: flex;
                 flex-flow: column wrap;
                 justify-content: center;
@@ -132,28 +151,38 @@ export default({
                 width:100vw;
                 background-color:#fff;
                 opacity:0.89;
-                transform:translatey(0);
+                transform:translateY(0);
                 overflow: hidden;
                 @include transition-ease;
                 & li{
                     margin-bottom: 20px;
+                    // animation-name:movmentItems;
+                    // animation-delay:0.2s;
+                    // animation-duration:0.5s;
                 }
             }
         }
-        // @media screen and (max-width:768px) {
-        // // body{
-        // //     width:0px;
-        // // }
-        //     .menu-toggle{
-        //         display:block;
-        //     }
-        //     .nav-menu{
-        //         display: none;
-        //         transform:translatey(-100%);
-        //     }
-        // }
     }
         
     }
+// animation 
+@keyframes movmentIn {
+    0%{
+        transform:translateY(-100vh);
+        
+    }
+    100%{
+        transform:translateY(0)
+    }
+}
+@keyframes movmentItems {
+    0%{
+        transform:translateX(100vw);
+        
+    }
+    100%{
+        transform:translateX(0)
+    }
+}
     
 </style>

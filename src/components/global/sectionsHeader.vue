@@ -1,13 +1,15 @@
 <template>
-    <header class="main-headers">
-                <h1 >{{header}}</h1>
-                <span class="under-line"></span>
-    </header>
+    <div class="header">
+        <header class="main-headers">
+                    <h1 >{{header}}</h1>
+                    <span class="under-line"></span>
+        </header>
+    </div>
 </template>
 
 <script>
 export default {
-    name:"main-headers",
+    name:"header",
     props:['header']
 }
 </script>
@@ -19,7 +21,6 @@ export default {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        margin-top: $navHight;
         padding:1rem;
 
     h1{

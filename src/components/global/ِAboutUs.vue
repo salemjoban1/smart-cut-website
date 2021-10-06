@@ -12,7 +12,7 @@
                             <img class="ceo-img" src="../../assets/personal-pic.png">
                             <div class="descrip">
                                 <h3>عبد الرحمن جوبان</h3>
-                                <p>منتح ومخرج</p>
+                                <h5>منتح وصانع أفلام</h5>
                             </div>
                         </div>
                     </div>
@@ -82,6 +82,9 @@ export default {
                     padding:0.5rem 0;
                     background-color:$primeColor;
                     color:#FFF;
+                    h5{
+                        color:#fff;
+                    }
                 }
                 img{
                 width:100%;   
