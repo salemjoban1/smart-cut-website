@@ -10,8 +10,8 @@
                 <li><a href="#" @click="hideOnClick">الرئيسية</a></li>
                 <li><a href="#about-us" @click="hideOnClick">من نحن</a></li>
                 <li><a href="#services" @click="hideOnClick">الخدمات</a></li>
-                <li><a href="#about-us" @click="hideOnClick">أعمالنا</a></li>
-                <li><a href="#about-us" @click="hideOnClick">عملائنا</a></li>
+                <li><a href="#works" @click="hideOnClick">أعمالنا</a></li>
+                <li><a href="#clients" @click="hideOnClick">عملائنا</a></li>
                 <li><a href="#contact" @click="hideOnClick">تواصل معنا</a></li>
                 
             </ul>
@@ -51,7 +51,7 @@ export default({
     .navBar{
         position: fixed;
         top:0;
-        z-index:3;
+        z-index:200;
         background-color:#fff;
         box-shadow: 2px 2px 5px rgb(209, 209, 208);
         width:100%;

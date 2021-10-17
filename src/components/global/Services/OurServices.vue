@@ -1,5 +1,5 @@
 <template>
-    <div id="our-services">
+    <div class="our-services">
         <div class="container">
             <div class="row g-3 " >
                 <service 
@@ -25,7 +25,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .inner-content{
-        background-color: rgb(153, 158, 161);
-    }
+    
 </style>

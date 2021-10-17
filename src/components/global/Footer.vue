@@ -3,7 +3,7 @@
       <div class="footer-content row">
         <div class="social-logo col">
           <ul>
-            <li>tes1</li>
+            <li><i class="fab fa-facebook"></i></li>
             <li>tes1</li>
             <li>tes1</li>
             <li>tes1</li>
@@ -46,7 +46,11 @@ export default {
           li{
             display: inline-block;
             padding-left:1rem;
-            color:#fff;
+            color:#000;
+            i{
+              font-size:50px;
+              color:#fff;
+            }
           }
         }
           .logo{

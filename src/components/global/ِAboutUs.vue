@@ -3,11 +3,11 @@
 1->text formating
 2->reverse order in mobile view
 3->computd function issue 'read more'
-4-> about-us hieght -->
+4-> about-us height -->
         <section class="about-us">
             <div class="container">
-                <div class="row justify-content-evenly">
-                     <div class="pictures p-4 col-sm-12 col-md-6 ">
+                <div class="row justify-content-between">
+                     <div class="pictures p-4 col-sm-12 col-md-5 ">
                          <div class="inner-border">
                             <img class="ceo-img" src="../../assets/personal-pic.png">
                             <div class="descrip">
@@ -52,8 +52,7 @@ export default {
 @import '../../scss/main.scss';
     .about-us{
         .description{
-            display:flex;
-            flex-direction: column;
+            
             p{
                 text-align: right;
                 font-size:20px;
@@ -69,10 +68,9 @@ export default {
             
         }
         .pictures{
-            
-            padding:0;
             .inner-border{
                 border:3px solid $primeColor;
+                width:100%;
                 .descrip{
                     display:flex;
                     justify-content: center;
@@ -87,7 +85,7 @@ export default {
                     }
                 }
                 img{
-                width:100%;   
+                    width:100%;   
                 }
             }
             
