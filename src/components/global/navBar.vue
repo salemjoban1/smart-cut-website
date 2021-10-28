@@ -131,6 +131,7 @@ export default({
                 a{
                     color:$primeColor;
                     font-size:1.2rem;
+                    @include transition-ease;
                    &:hover,&:active{
                         color:$secondColor;
                         @include transition-ease;
@@ -145,12 +146,12 @@ export default({
                 justify-content: center;
                 align-items: center;
                 position: absolute;
-                top:$navHight;
+                top:0;
                 right:0;
                 height: 100vh;
                 width:100vw;
                 background-color:#fff;
-                opacity:0.89;
+                opacity:0.9;
                 transform:translateY(0);
                 overflow: hidden;
                 @include transition-ease;

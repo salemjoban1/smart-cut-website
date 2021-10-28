@@ -1,24 +1,26 @@
 <template>
-  <div class="footer container-fluid">
+  <div class="footer">
+    <div class="container">
       <div class="footer-content row">
-        <div class="social-logo col">
-          <ul>
-            <li><i class="fab fa-facebook"></i></li>
-            <li>tes1</li>
-            <li>tes1</li>
-            <li>tes1</li>
-          </ul>
-          <div class="logo">
-                <a href="#"><img src="../../assets/logo.png"></a>
-          </div>
-        </div>
-        <div class="direct-contact col">
+        <div class="direct-contact col-md-6">
             <ul>
-              <li>name.compony.com</li>
-              <li> +967 771385262</li>
-              <li>المكلا </li>
+              <li><i class="fas fa-envelope-open-text"></i><span>name.compony.com</span></li>
+              <li><i class="fas fa-phone"></i> <span>+967 771385262</span></li>
+              <li><i class="fas fa-map-marker-alt"></i><span>اليمن-حضرموت-المكلا</span> </li>
             </ul>
         </div>
+        <div class="social-logo col-md-6">
+            <ul>
+              <li><i class="fab fa-youtube"></i></li>
+              <li><i class="fab fa-facebook"></i></li>
+              <li><i class="fab fa-instagram"></i></li>
+              <li><i class="fab fa-twitter"></i></li>
+            </ul>
+            <div class="logo">
+                  <a href="#"><img src="../../assets/LogoSolidWhite.png"></a>
+            </div>
+        </div>
+      </div>
       </div>
   </div>
 </template>
@@ -37,24 +39,24 @@ export default {
 @import '../../scss/main.scss';
   .footer{
     &-content{
-      display: flex;
-      justify-content:space-evenly;
-      align-items: center;
       .social-logo{
         ul{
           padding:1rem;
           li{
             display: inline-block;
-            padding-left:1rem;
-            color:#000;
+            padding-left:0.5rem;
             i{
-              font-size:50px;
+              font-size:30px;
               color:#fff;
+              cursor:pointer;
+              &:hover{
+                color:rgb(109, 107, 7)
+              }
             }
           }
         }
           .logo{
-                background-color:$primeColor;
+                padding:0.5rem 0;
                 img{
                     width:12rem;
                     height: $navHight - 2rem;
@@ -67,6 +69,10 @@ export default {
           li{
             color:#fff;
             padding-bottom: 1rem;
+            i{
+              font-size:20px;
+              padding:0.5rem;
+            }
           }
         }
       }

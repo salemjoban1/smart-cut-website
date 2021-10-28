@@ -11,7 +11,7 @@
             </div>
             <Slide v-for="(slide,index) in slides" :key="index">
                 <div v-show=" currentSlide === index+1" class="slide-inner"
-                :style="{'background-image':'url(' + slide.imgsrc + ')'}">
+                :style="{'background-image':'url(' + require(`../../../assets/slides/${slide.imgsrc}.png`) + ')'}">
                     <div class="content">
                         <h1 class="header">{{slide.header}}</h1>
                         <h3 class="subHeader">{{slide.subHeader}}</h3>
@@ -101,13 +101,13 @@ export default {
             position:absolute;
             top:0;
             right:0;
-            background-image:url("../../../assets/slides/01.png");
             background-size:cover;
             background-attachment: center center;
             z-index: 3;
             height: 100%;
             width: 100%;
-            background-color: #000;
+            // background-color: #000;
+            
             .content{
                 z-index:3;
                 display:flex;
@@ -127,14 +127,18 @@ export default {
                     font-size:1.5rem;
                     font-weight: normal;
                 }
+                a{
+                    width:10rem;
+                }
                 .btn-contact{
+                    width:100%;
                     color:$primeColor;
                     font-size: 1.2rem;
                     font-weight: bold;
                     align-self:flex-start;
                     border:none;
                     background-color:$secondColor;
-                    padding:8px 26px;
+                    padding:0.5rem 1.6rem;
                     cursor:pointer;
                 }
             }

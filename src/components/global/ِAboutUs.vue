@@ -34,17 +34,27 @@ export default {
     props:['text'],
     data(){
         return{
-            fit:false
+            readMore:false
         }
     },
     methods:{
         // error
-        fitTextPlace:function(){
-            let description = document.querySelector('.about-us .description');
-            let fullHieght = description.style.clientHeight;
-            console.log(fullHieght);
-        }
-    }
+        // fitTextPlace:function(){
+        //     let pictureHeight = document.querySelector('.about-us .pictures .inner-border').clientHeight;
+        //     let descriptionHeight = document.querySelector('.about-us .description p');
+        //     let container = null;
+        //     if ((descriptionHeight.clientHeight > pictureHeight)&& (this.readMore === false)){
+        //         container = descriptionHeight.style.height;
+        //         descriptionHeight.style.height = `${pictureHeight}px`;
+        //         console.log(`${pictureHeight}px`);
+        //         this.readMore === !this.readMore;
+        //     }
+        //     else{
+        //         descriptionHeight.style.height = container;
+        //     }
+        //     console.log(`${descriptionHeight}`);
+        // }
+    },
 }
 </script>
 
@@ -52,11 +62,13 @@ export default {
 @import '../../scss/main.scss';
     .about-us{
         .description{
-            
+            overflow:hidden;
+            // height:350px;
             p{
                 text-align: right;
                 font-size:20px;
-                line-height: 1.8;
+                line-height: 2;
+                font-weight: 400;
                 text-align: justify;
             }
             .read-more{
@@ -64,6 +76,10 @@ export default {
                 color:#012c97;
                 font-size:1.2rem;
                 font-weight: bold;
+                cursor:pointer;
+                background-color:#fff;
+                display:inline-block;
+                width:100%;
             }
             
         }
@@ -82,6 +98,8 @@ export default {
                     color:#FFF;
                     h5{
                         color:#fff;
+                        padding-top:0.5rem;
+                        font-size:1.2rem;
                     }
                 }
                 img{

@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <header class="main-headers">
-                    <h1 >{{header}}</h1>
+                    <h1 :style="{'color':header.color}">{{header.title}}</h1>
                     <span class="under-line"></span>
         </header>
     </div>
@@ -10,7 +10,9 @@
 <script>
 export default {
     name:"header",
-    props:['header']
+    props:{
+        header:Object
+    }
 }
 </script>
 
