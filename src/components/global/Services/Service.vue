@@ -1,18 +1,25 @@
 <template>
-    <div class="service col-6 col-md-3 col-lg-3">
-        <div class="all-services-content">
-            <div class="inner-content" :class="{show:service.showWindow}">
-                <img :src="require(`../../../assets/services/${service.imgsrc}`)" alt="">
+    <div class="service"
+        :class="service.classType">
+        <div class="content-box" v-if ="!service.descriptionWindow" >
+            <div class="inner-content"
+                :class="{show:service.arrowVisible}">
+                
+                <img :src="require(`../../../assets/services/${service.imgSrc}`)"
+                alt="">
                 <h4>{{service.name}}</h4>
+
             </div>
-            <div v-if="service.showWindow" class="details-window" :style="{'width':ServiceDimensions.fullWidth}">
-                <div class="top-part">
-                    <div class="close-btn">
-                        <span class="line"></span>
-                    </div>
+        </div>
+        <div v-else-if ="service.descriptionWindow"
+            class="description-window"
+            :class="{show:service.isOpen}">
+            <div class="top-part">
+                <div class="close-btn">
+                    <span></span>
                 </div>
-                <p>{{service.description}}</p>
             </div>
+            <p>{{serviceDescription}}</p>
         </div>
     </div>
 
@@ -23,28 +30,17 @@ export default {
     name:'service',
     props:{
         service:Object,
-        ServiceDimensions:Object
+        serviceDescription:String,
     },
-    computed:{
-        // matchHeight:function(){
-        //     let serviceContent = document.querySelector('.inner-content');
-        //     console.log(serviceContent);
-        //     return serviceContent;
-        // },
-    },
-    mounted() {
-            this.matchHeight;
-        },
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../../../scss/main.scss';
     .service{
-        padding:20px 0 0 20px;
+        padding:14px 0 0 18px;
         position:relative;
-        .all-services-content{
-            
+        .content-box{
             .inner-content{
                 position: relative;
                 display: flex;
@@ -80,58 +76,51 @@ export default {
                 }
                 h4{
                     padding-top:1rem;
-                    color:$primeColor;
+                    color:rgb(66, 66, 66);
                     text-align: center;
                 }
             }
-            .details-window{
-                position:absolute;
-                display:flex;
-                flex-direction: column;
-                // width:680px;
-                // height:196px;
-                right:0;
-                // replace with variable
-                top:100%;
-                margin-top:15px;
-                z-index:3;
-                background-color: #fff;
-                border:2px solid blue;
-                .top-part{
-                    background-color: blue;
-                    display: flex;
-                    justify-content: flex-end;
-                    padding:0 0 0.5rem 0.5rem;
-                    .close-btn{
-                        color:#fff;
-                        cursor: pointer;
-                        span{
-                            position: relative;
-                            display: inline-block;
+        }
+        .description-window{
+            display:none;
+            flex-direction: column;
+            // replace with variable
+            background-color: #fff;
+            border:2px solid blue;
+            .top-part{
+                background-color: blue;
+                display: flex;
+                justify-content: flex-end;
+                padding:0 0 0.5rem 0.5rem;
+                .close-btn{
+                    color:#fff;
+                    cursor: pointer;
+                    span{
+                        position: relative;
+                        display: inline-block;
+                        width:15px;
+                        height:2px;
+                        background-color: #fff;
+                        transform:rotate(45deg) ;
+                        &::after{
+                            content:'';
+                            position: absolute;
+                            top:5px;
+                            right:0;
                             width:15px;
                             height:2px;
                             background-color: #fff;
-                            transform:rotate(45deg) ;
-                            &::after{
-                                content:'';
-                                position: absolute;
-                                top:5px;
-                                right:0;
-                                width:15px;
-                                height:2px;
-                                background-color: #fff;
-                                transform:rotate(-90deg) translate(5px,0);
-                            }
+                            transform:rotate(-90deg) translate(5px,0);
                         }
                     }
-                    p{
-                        
-                    }
                 }
-                p{
-                    margin:2rem;
-                    word-spacing: 3px;
-                }
+            }
+            p{
+                margin:2rem;
+                word-spacing: 3px;
+            }
+            &.show{
+                display:flex;
             }
         }
         

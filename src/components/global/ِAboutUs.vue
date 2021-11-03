@@ -1,59 +1,52 @@
 <template>
-<!-- problems:
-1->text formating
-2->reverse order in mobile view
-3->computd function issue 'read more'
-4-> about-us height -->
-        <section class="about-us">
-            <div class="container">
-                <div class="row justify-content-between">
-                     <div class="pictures p-4 col-sm-12 col-md-5 ">
-                         <div class="inner-border">
-                            <img class="ceo-img" src="../../assets/personal-pic.png">
-                            <div class="descrip">
-                                <h3>عبد الرحمن جوبان</h3>
-                                <h5>منتح وصانع أفلام</h5>
-                            </div>
+    <section class="about-us">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="pictures col-12 col-md-4">
+                    <!-- div to make border -->
+                    <div class="inner-border">
+                        <img class="ceo-img" src="../../assets/personal-pic.png">
+                        <div class="descrip">
+                            <h3>عبد الرحمن جوبان</h3>
+                            <h5>منتج وصانع أفلام</h5>
                         </div>
                     </div>
-                    <div class="description p-4 col-sm-12 col-md-6 ">
-                        <p>
-                            {{text}}
-                        </p>
-                        <span class="read-more" @click="fitTextPlace()">انقر للمزيد</span>
-                    </div>
                 </div>
-              </div>
-        </section>
+                <div class="description col-12 col-md-7 ">
+                    <p>
+                        <!-- main text always be shown -->
+                        {{aboutText.mainText}}
+                        <!-- read more btn to show or hide complement text and hide btn itself-->
+                        <span class="read-btn more"
+                            :class="{show:readMore}"
+                            @click="readMore=!readMore,readLess=!readLess">اكثر</span>
+                        <!-- complement text -->
+                        <span class="less" :class="{show:readLess}">
+                            {{aboutText.textMore}}
+                            <!-- less btn to show hide complement text and hide btn itself -->
+                            <span class="read-btn less"
+                            :class="{show:readLess}" 
+                            @click="readMore=!readMore,readLess=!readLess">اقل</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
   
 </template>
 
 <script>
 export default {
     name:'about-us',
-    props:['text'],
+    props:{
+        aboutText:Object
+    },
     data(){
         return{
-            readMore:false
+            readMore:true,
+            readLess:false
         }
-    },
-    methods:{
-        // error
-        // fitTextPlace:function(){
-        //     let pictureHeight = document.querySelector('.about-us .pictures .inner-border').clientHeight;
-        //     let descriptionHeight = document.querySelector('.about-us .description p');
-        //     let container = null;
-        //     if ((descriptionHeight.clientHeight > pictureHeight)&& (this.readMore === false)){
-        //         container = descriptionHeight.style.height;
-        //         descriptionHeight.style.height = `${pictureHeight}px`;
-        //         console.log(`${pictureHeight}px`);
-        //         this.readMore === !this.readMore;
-        //     }
-        //     else{
-        //         descriptionHeight.style.height = container;
-        //     }
-        //     console.log(`${descriptionHeight}`);
-        // }
     },
 }
 </script>
@@ -63,27 +56,37 @@ export default {
     .about-us{
         .description{
             overflow:hidden;
-            // height:350px;
+            padding:2rem 1rem;
             p{
-                text-align: right;
                 font-size:20px;
                 line-height: 2;
                 font-weight: 400;
                 text-align: justify;
             }
-            .read-more{
-                align-self: flex-end;
+            .read-btn{
                 color:#012c97;
                 font-size:1.2rem;
                 font-weight: bold;
                 cursor:pointer;
-                background-color:#fff;
-                display:inline-block;
-                width:100%;
+                @include transition-ease;
             }
-            
+            // read more btn style to show complement text
+            .more{
+                    display:none;
+                    &.show{
+                        display: inline;
+                    }
+                }
+            // read less btn style to hide complement text
+            .less{
+                    display:none;
+                    &.show{
+                        display: inline;
+                    }
+                }   
         }
         .pictures{
+            padding:2.5rem 1rem 0 1rem;
             .inner-border{
                 border:3px solid $primeColor;
                 width:100%;
@@ -96,10 +99,12 @@ export default {
                     padding:0.5rem 0;
                     background-color:$primeColor;
                     color:#FFF;
+                    h3{
+                        font-size:1.4rem;;
+                    }
                     h5{
-                        color:#fff;
                         padding-top:0.5rem;
-                        font-size:1.2rem;
+                        font-size:1.1rem;
                     }
                 }
                 img{

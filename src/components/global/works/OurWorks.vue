@@ -3,17 +3,24 @@
       <div class="container">
           <div v-if="!mobileView">
                 <div class="works-group row justify-center g-3" 
-                v-for="(worksGroup,index) in worksDevided" 
-                :key="index"
-                v-show="currentWorksGroup === index +1">
-                    <Work class="col-md-6 col-lg-4" v-for="(work,index) in worksGroup" :key="index" :work="work"/>
+                v-for="(worksGroup,parent_index) in worksDevided" 
+                :key="parent_index"
+                v-show="currentWorksGroup === parent_index +1">
+                    <Work class="col-md-6 col-lg-4" 
+                    v-for="(work,index) in worksGroup" 
+                    :key="index" :work="work"
+                    @click="playVideo(parent_index,index)"/>
+                    <div class="video-player"
+                        :class="{open:openPlayer}">
+                        {{videoInfo}}
+                    </div>
                 </div>
             </div>
             <div v-if="mobileView">
                 <div class="works-group row justify-center g-3" 
                 v-for="(work,index) in allWorks" 
                 :key="index"
-                v-show="currentWorksGroup === index +1">
+                v-show="mobileCurrentWorks === index +1">
                     <Work class="col-md-6 col-lg-4" :work="work"/>
                 </div>
             </div>
@@ -30,12 +37,7 @@
                         @click="updateCurrentGroup(index),changeArrowsVisibility()"
                         :class="{active:currentWorksGroup === index + 1}" ></span>
                     </div>
-                    <div v-else-if="mobileView" class="condition">
-                        <span v-for="(work,index) in allWorks" 
-                        :key="index"
-                        @click="updateCurrentGroup(index),changeArrowsVisibility()"
-                        :class="{active:currentWorksGroup === index + 1}" ></span>
-                    </div>
+                    
               </div>
               <div class="left-arrow" 
               :class="{hideArrowLeft:hideArrowLeft}"
@@ -48,15 +50,19 @@
 </template>
 
 <script>
-import Work from './Work.vue'
+import Work from './Work.vue';
+
 export default {
     name:'our-works',
     data(){
         return{
             currentWorksGroup:2,
+            mobileCurrentWorks:2,
             hideArrowRight:false,
             hideArrowLeft:false,
-            workGroupHeight:0
+            workGroupHeight:0,
+            openPlayer:false,
+            videoInfo:null,
         }
     },
     props:{
@@ -66,9 +72,6 @@ export default {
         },
     components:{
         Work
-    },
-    computed:{
-        
     },
     methods:{
         matchGroupsHeight:function(){
@@ -90,19 +93,34 @@ export default {
             }
         },
         updateCurrentGroup:function(index){
-            this.currentWorksGroup = index + 1;
+            if(this.mobileView){
+                this.mobileCurrentWorks = index + 1;
+            }else{
+                this.currentWorksGroup = index + 1;
+            }
+            
         },
         changeArrowsVisibility:function(){
-            if ((this.currentWorksGroup === this.worksDevided.length) && (!this.mobileView)){
+            if ((this.currentWorksGroup === this.worksDevided.length)
+                 && (!this.mobileView))
+            {
                 this.hideArrowLeft = true;
             }
-            else if ((this.currentWorksGroup === this.allWorks.length) && (this.mobileView)){
+            else if ((this.mobileCurrentWorks === this.allWorks.length) 
+                    && (this.mobileView))
+            {
                 this.hideArrowLeft = true;
             }
-            else{
+            else
+            {
                 this.hideArrowLeft = false;
             }
-            if (this.currentWorksGroup === 1){
+            if (this.currentWorksGroup === 1)
+            {
+                this.hideArrowRight = true;
+            }
+            else if(this.mobileCurrentWorks === 1)
+            {
                 this.hideArrowRight = true;
             }
             else{
@@ -113,9 +131,13 @@ export default {
             if(this.hideArrowLeft === true){
                 return;
             }
-            else
+            else if (!this.mobileView)
             {
                 this.currentWorksGroup++;
+            }
+            else if (this.mobileView)
+            {
+                this.mobileCurrentWorks++;
             }
             
         },
@@ -123,14 +145,33 @@ export default {
             if(this.hideArrowRight === true){
                 return;
             }
-            else
+            else if (!this.mobileView)
             {
                 this.currentWorksGroup--;
             }
+            else if (this.mobileView)
+            {
+                this.mobileCurrentWorks--;
+            }
         },
+        playVideo:function(parent_index,index){
+            for(let i = 0; i < this.worksDevided.length; i++)
+            {
+                for (let j = 0; j < this.worksDevided[i].length; j++)
+                {
+                    if ((parent_index === i) && (index === j))
+                    {
+                        this.openPlayer = !this.openPlayer;
+                        this.videoInfo = this.worksDevided[i][j].imgsrc;
+                        console.log(this.worksDevided[i][j].imgsrc);
+                    }
+                }
+            }
+        }
     },
     mounted(){
         this.matchGroupsHeight();
+       
     }
 }
 </script>
@@ -138,13 +179,28 @@ export default {
 <style lang="scss" scoped>
 @import '../../../scss/main.scss';
     .our-works{
+        .works-group{
+            position:relative;
+            .video-player{
+                display:none;
+                position:absolute;
+                top:0;
+                right:0;
+                width:100%;
+                background-color:rgb(0, 0, 0);
+                height:80vh;
+                &.open{
+                    display:block
+                }
+            }
+        }
         .pagination{
             width:100%;
             display: flex;
             // align-items:center;
             justify-content:center;
-            padding:2rem 0;
-            margin-top:2rem;
+            padding-bottom:2rem;
+            margin-top:1rem;
             .right-arrow{
                 padding-left:1rem;
                 width:1.5rem;

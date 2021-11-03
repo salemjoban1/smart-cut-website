@@ -53,12 +53,12 @@ export default {
                 //         background-color:red;
                 //     }
             }
-            &:hover img{
+            &:hover img,&:active img{
                 transform: scale(1.2,1.2);
                 cursor: pointer;
                 transition: 0.5s ease-in-out;
             }
-            &:hover .youtube-icon{
+            &:hover .youtube-icon,&:active .youtube-icon{
                 background-color:red;
                 cursor: pointer;
                 transition: 0.5s ease-in-out;

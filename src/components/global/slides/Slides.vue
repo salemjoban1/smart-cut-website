@@ -9,19 +9,21 @@
                     <span class="line" :class="{active:index+1 === currentSlide}"></span>
                 </span>
             </div>
-            <Slide v-for="(slide,index) in slides" :key="index">
-                <div v-show=" currentSlide === index+1" class="slide-inner"
-                :style="{'background-image':'url(' + require(`../../../assets/slides/${slide.imgsrc}.png`) + ')'}">
-                    <div class="content">
-                        <h1 class="header">{{slide.header}}</h1>
-                        <h3 class="subHeader">{{slide.subHeader}}</h3>
-                        <a href="#contact"><button class="btn-contact">تواصل معنا</button></a>
-                    </div>
-                    <!-- <div class="filter"> -->
-                        <!-- <img :src="require(`../../../assets/slides/${slide.imgsrc}`)" alt=""> -->
-                    <!-- </div> -->
-                </div>
-            </Slide>
+                <Slide v-for="(slide,index) in slides" :key="index">
+                    <transition name="slide-move">
+                        <div v-show=" currentSlide === index+1" class="slide-inner"
+                        :style="{'background-image':'url(' + require(`../../../assets/slides/${slide.imgsrc}.png`) + ')'}">
+                            <div class="content">
+                                <h1 class="header">{{slide.header}}</h1>
+                                <h3 class="subHeader">{{slide.subHeader}}</h3>
+                                <div v-show="slide.hasBtn && index + 1 === currentSlide">
+                                    <a href="#contact"><button class="btn-contact">{{slide.btn}}</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </Slide>
+            
         <!-- </div> -->
     </div>
 </template>
@@ -37,7 +39,8 @@ export default {
         return{
             slideLen:this.slides.length,
             currentSlide:1,
-            lineActive:true
+            lineActive:true,
+            slideInterval:null
         }
         
     },
@@ -47,8 +50,24 @@ export default {
     methods: {
         updateCurrentSlide:function(index){
             this.currentSlide = index + 1;
-        } 
+        },
+
     },
+    mounted(){
+        this.slideInterval = setInterval(() => {
+            if (this.currentSlide < this.slideLen)
+            {
+                this.currentSlide++;
+            }
+            else
+            {
+                this.currentSlide = 1;
+            }
+        }, 4000);
+    },
+    beforeDestroy(){
+        clearInterval(this.slideInterval);
+    }
 
 }
 </script>
@@ -58,9 +77,9 @@ export default {
     .slides{
         width:100vw;
         height: calc(100vh - #{$navHight});
+        // min-height: 36rem;
         position:relative;
         overflow: hidden;
-        
         .pagination{
             z-index:5;
             width:50px;
@@ -80,9 +99,11 @@ export default {
                     width:35px;
                     height: 2px;
                     background-color: #fff;
+                    @include transition-ease;
                     &.active{
                         position: relative;
                         transform:translateX(-15px);
+                        @include transition-ease;
                     }
                     &.active::before{
                         content:'';
@@ -92,6 +113,7 @@ export default {
                         width:3px;
                         height: 8px;
                         background-color: #fff;
+                        @include transition-ease;
                         // transform: translateX(-7px);
                     }       
                 }
@@ -102,13 +124,14 @@ export default {
             top:0;
             right:0;
             background-size:cover;
-            background-attachment: center center;
+            background-position: center center;
             z-index: 3;
             height: 100%;
             width: 100%;
             // background-color: #000;
             
             .content{
+                // transform: translateY(-50%);
                 z-index:3;
                 display:flex;
                 flex-direction: column;
@@ -117,7 +140,7 @@ export default {
                 top:20%;
                 // count the formula
                 right:20%;
-                width:60%;
+                width:70%;
                 .header{
                     color:#fff;
                 }
@@ -131,7 +154,8 @@ export default {
                     width:10rem;
                 }
                 .btn-contact{
-                    width:100%;
+                    width:fit-content;
+                    background: none;
                     color:$primeColor;
                     font-size: 1.2rem;
                     font-weight: bold;
@@ -140,6 +164,26 @@ export default {
                     background-color:$secondColor;
                     padding:0.5rem 1.6rem;
                     cursor:pointer;
+                    // position:relative;
+                    // &::before{
+                    //     content:'';
+                    //     position:absolute;
+                    //     width:3px;
+                    //     left:0;
+                    //     top:0;
+                    //     height: 100%;
+                    //     background-color: $secondColor;
+                    // }
+                    // &::after{
+                    //     content:'';
+                    //     position:absolute;
+                    //     width:3px;
+                    //     right:0;
+                    //     top:0;
+                    //     height: 100%;
+                    //     background-color: $secondColor;
+
+                    // }
                 }
             }
             .filter{
@@ -161,7 +205,22 @@ export default {
             }
             
         }
+        .slide-move-enter-active{
+            transition: all 1s ease-in-out;
+        }
+        .slide-move-leave-active {
+            transition: all 0.5s ease-in-out;
+            transform:translateX(-50);
+            }
+
+        .slide-move-enter-from{
+            transition: all 0.5s ease-in-out;
+            transform:translateX(0);
+        }
+        .slide-move-leave-to {
+            opacity: 0;
+            transform:translateX(0);
+         }
     }
-    
     
 </style>

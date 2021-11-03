@@ -1,5 +1,5 @@
 <template>
-    <div class="client col-6 col-sm-6 col-lg-3">
+    <div class="client col-6 col-sm-6">
         <img :src="require(`../../../assets/clients/${client.imgsrc}`)" alt="">
     </div>
 </template>
@@ -18,10 +18,10 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding:1.5rem 1rem;
+        padding:1rem;
 
         img{
-            width:250px;
+            width:80%;
             
         }
     }

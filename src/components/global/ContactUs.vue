@@ -8,7 +8,9 @@
                 <textarea name="type" class="desc col-md-10" cols="" rows="" placeholder="اكتب طلبك..."></textarea>
                 <!-- <div class="empty col-md-2"></div> -->
                 <!-- error => how to make item take full page with flex  -->
-                <input type="submit" value="ارسال" class="submit col-md-12">
+                <div class="row">
+                    <input type="submit" value="ارسال" class="submit col-md-10">
+                </div>
         </form>
     </div>
 </template>
@@ -56,7 +58,6 @@ export default {
             display:block;
             background-color:$secondColor;
             padding:0.2rem 1.4rem;
-            float:right;
             align-self: flex-start;
         }
     }

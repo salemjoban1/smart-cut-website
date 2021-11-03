@@ -9,29 +9,31 @@
             <Slides :slides="slides"/>
         </div>
           <div id="about-us">
-              <sectionsHeader :header="headers.about"/>
-              <AboutUs :text="about"/>
+              <SectionsHeader :header="headers.about"/>
+              <AboutUs :aboutText="aboutText"/>
           </div>
           <div id="services">
-            <sectionsHeader :header="headers.services"/>
-            <ourServices :services="services"/>
+            <SectionsHeader :header="headers.services"/>
+            <ourServices :services="services"
+                          :mobileView="mobileView"/>
           </div>
           <div id="works">
-            <sectionsHeader :header="headers.works"/>
+            <SectionsHeader :header="headers.works"/>
             <OurWorks :worksDevided="worksDevided"
              :allWorks="allWorks" 
              :mobileView="mobileView"/>
           </div>
           <div id="clients">
-            <sectionsHeader :header="headers.clients"/>
+            <SectionsHeader :header="headers.clients"/>
             <OurClients :clients="clients"/>
           </div>
           <div id="contact">
-            <sections-header :header="headers.contact"/>
+            <SectionsHeader :header="headers.contact"/>
             <contactUs/>
           </div>
           <div id="footer">
             <Footer/>
+            <!-- <youtube video-id="jhk"></youtube> -->
           </div>
         <!-- <router-view /> -->
       </div>
@@ -40,7 +42,7 @@
 // importing all components to use here
 import  navBar from '@/components/global/navBar.vue';
 import Slides from '@/components/global/slides/Slides.vue';
-import sectionsHeader from'@/components/global/sectionsHeader.vue';
+import SectionsHeader from'@/components/global/sectionsHeader.vue';
 import AboutUs from'@/components/global/ِAboutUs.vue';
 import ourServices from'@/components/global/Services/OurServices.vue';
 import OurWorks from '@/components/global/works/OurWorks.vue';
@@ -52,6 +54,8 @@ export default({
   name:"app",
   data(){
     return{
+      test:null,
+      test1:null,
       headers:{
         'about':{'title':'من نحن',
                 'color':'$primeColor'},
@@ -66,8 +70,10 @@ export default({
       },
       mobileView:false,
       slides:{},
-      about:`الحياةُ لا تتوقفُ عن منحِ الفُرص، لكنّها لمن ينتهزها
-      على امتدادِ رحلةٍ قاربتْ ١٥ عامًا في مجالِ الإعلان والإنتاجِ المرئي كوّنا تجربةً مردُّها حُبُّ المعرفة والاطِّلاع، وخبرةً منبعها العملُ في مُختلفِ البقاعِ والأصقاع. ثم وضعنا خُلاصةَ خبراتنا في مشروعٍ يُعبِّرُ عن كياننا وأهدافنافي العاشر من أكتوبر عام ٢٠١٩ ميلاديّة، أسسنا 'Smart Cut' في حضرموت اليمن، لتكونَ وِجهةً وواجهةً لعلاقاتٍ قويّة، وإنتاجاتٍ نوعيّة مع أكبرِ الشركات والمُؤسسات في المنطقة.جمعنا طاقمًا مُحترفًا طموحًا، فأرسينا دعائمَ الثقة مع عملائنا، واكتسبنا سُمعةً طيّبة لالتزامنا الجديّة، الاحترافيّة، المرونة في أشدِّ الضغوط، والدقّة في المواعيدِ وتسليمِ الأعمال.ولأنّ هدفنا مُنذُ البداية لم يرتبط بالوصولِ السريع، ولا بالإطراءاتِ العابرة، بل بالقدرةِ على الإلهامِ والتأثير، فإنّنا نستشرِفُ الفُرصَ المُستقبليّة للتوسّع، وتجاوز الحدودِ الجغرافيّة، والقوالبَ النمطيّة.مع كُلّ بصمةِ عمل ، ولبنةِ نجاح، نزدادُ يقينًا بأنّ شركتنا هي شراكاتنا التي لا تنحصرُ بمكانٍ وزمن ، ومكسبنا هو أعمالنا التي لا تُقدّرُ بثمن، ودافعنا للاستمرارِ هو إيماننا بما نُقدّم، وشغفنا فيما يُنمِّي الإنسانَ ويخدم.`,
+      aboutText:{mainText:`الحياةُ لا تتوقفُ عن منحِ الفُرص، لكنّها لمن ينتهزها.
+                 على امتدادِ رحلةٍ قاربتْ ١٥ عامًا في مجالِ الإعلان والإنتاجِ المرئي كوّنا تجربةً مردُّها حُبُّ المعرفة والاطِّلاع، وخبرةً منبعها العملُ في مُختلفِ البقاعِ والأصقاع. ثم وضعنا خُلاصةَ خبراتنا في مشروعٍ يُعبِّرُ عن كياننا وأهدافنا. في العاشر من أكتوبر عام ٢٠١٩ ميلاديّة، أسسنا 'Smart Cut' في حضرموت اليمن، لتكونَ وِجهةً وواجهةً لعلاقاتٍ قويّة، وإنتاجاتٍ نوعيّة مع أكبرِ الشركات والمُؤسسات في المنطقة. جمعنا طاقمًا مُحترفًا طموحًا، فأرسينا دعائمَ الثقة مع عملائنا، واكتسبنا سُمعةً طيّبة لالتزامنا الجديّة، الاحترافيّة، المرونة في أشدِّ الضغوط، والدقّة في المواعيدِ وتسليمِ الأعمال. `,
+                 textMore:`ولأنّ هدفنا مُنذُ البداية لم يرتبط بالوصولِ السريع، ولا بالإطراءاتِ العابرة، بل بالقدرةِ على الإلهامِ والتأثير، فإنّنا نستشرِفُ الفُرصَ المُستقبليّة للتوسّع، وتجاوز الحدودِ الجغرافيّة، والقوالبَ النمطيّة. مع كُلّ بصمةِ عمل ، ولبنةِ نجاح، نزدادُ يقينًا بأنّ شركتنا هي شراكاتنا التي لا تنحصرُ بمكانٍ وزمن ، ومكسبنا هو أعمالنا التي لا تُقدّرُ بثمن، ودافعنا للاستمرارِ هو إيماننا بما نُقدّم، وشغفنا فيما يُنمِّي الإنسانَ ويخدم.`
+                },
       services:{},
       allWorks:[],
       worksDevided:[],
@@ -80,7 +86,7 @@ export default({
   components:{
     navBar,
     Slides,
-    sectionsHeader,
+    SectionsHeader,
     AboutUs,
     ourServices,
     OurWorks,
@@ -126,114 +132,176 @@ export default({
           'id':'1',
           'imgsrc':'01',
           'header':`مرحبًا بك في شركة Smart Cut \n للإعلان والإنتاج الإعلامي`,
-          'subHeader':`نُنتجُ أفضلَ الأعمال، بجودة وحرفيّة عالية`
+          'subHeader':`نُنتجُ أفضلَ الأعمال، بجودة وحرفيّة عالية`,
+          'hasBtn':true,
+          'btn':`تواصل معنا`
 
         },
         {
           'id':'2',
           'imgsrc':'02',
           'header':`لن يطول بحثك أكثر`,
-          'subHeader':`نقدم لك خدمات متكاملة في مجال الميديا بأفكارٍ حصريّة ومواصفاتٍ عالميّة`
+          'subHeader':`نقدم لك خدمات متكاملة في مجال الميديا بأفكارٍ حصريّة ومواصفاتٍ عالميّة`,
+          'hasBtn':true,
+          'btn':`تواصل معنا`
         },
         {
           'id':'3',
           'imgsrc':'03',
           'header':`أعمالنا تُواكبُ تطلّعاتكم`,
-          'subHeader':`كُلُّ عملٍ نُنتجهُ هو حصيلةُ خبرة متراكمة، وخطواتٍ طموحة، ورؤية فريدة`
+          'subHeader':`كُلُّ عملٍ نُنتجهُ هو حصيلةُ خبرة متراكمة، وخطواتٍ طموحة، ورؤية فريدة`,
+          'hasBtn':true,
+          'btn':`تواصل معنا`
         },
         {
           'id':'4',
           'imgsrc':'04',
           'header':`بانتظارِ تواصلك`,
-          'subHeader':`فريقنا متواجدٌ للاطلاعِ على رسائلك واستفساراتك والردّ عليها، فلا تتردد في التواصل معنا`
+          'subHeader':`فريقنا متواجدٌ للاطلاعِ على رسائلك واستفساراتك والردّ عليها، فلا تتردد في التواصل معنا`,
+          'hasBtn':true,
+          'btn':`تواصل معنا`
         },
       ],
     this.services=[
       {
         'id':1,
+        'classType':'col-6 col-md-3',
         'name':"الأفلام الترويجية والتعريفية",
-        'imgsrc':'01.png',
+        'imgSrc':'01.png',
+        'imgAlt':'',
         'description':`مهما كانت بصماتُ شركتكَ على أرضِ الواقع جليّةً وفاعلة، فلا غنىً لك عن أفلامٍ ترويجيّة وتعريفيّة تستقطبُ شريحةً أكبر من المستهدفين، وتُحسِّنُ صورتكَ الذهنيّة لديهم، كما تعفيكَ من تكليفِ مندوبِ المبيعات بشرحِ نشاطك وخدماتك لكُلِّ عميلٍ مُحتمل.
         نُنتجُ لك أفلامًا تستعرضُ أعمالك وإنجازاتك بأعلى مستوياتِ الجودة والاحترافيّة،  لنجعلَ اسمكَ دائمًا في الصدارة.`,
-        'showWindow':true
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':2,
+        'classType':'col-6 col-md-3',
         'name':"الأفلام الوثائقية",
-        'imgsrc':'02.png',
-        'showWindow':false
+        'imgSrc':'02.png',
+        'description':`ما يصنعُ قيمةَ اللحظاتِ المُميّزة، هو رصيدها من الخطواتِ والإنجازات.
+        سواءً كان لديك مشروعٌ استثنائي تودُّ توثيق مراحله، أو تودُّ العودة بالزمن في مسارِ فيلمٍ يستعرضُ تاريخ شركتك، ونجاحاتها لتعرضه في ذكرى التأسيس القادمة،
+        أو ترغبُ في تسليطِ الضوء على قصصِ نجاحٍ مُلهمة في بيئة عملك.
+        سنكونُ معك لنُظهر ذلك بأفضلِ ما يكون، من الماضي إلى المستقبل.`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':3,
+        'classType':'col-6 col-md-3',
         'name':"الفيديو كليب (فيديو غنائي)",
-        'imgsrc':'03.png',
-        'showWindow':false
+        'imgSrc':'03.png',
+        'description':`الموسيقى لغةُ الشعوبِ المُشتركة، فلا تجدُ طفلاً ولا بالغًا -في أيِّ بقعةٍ من العالم- إلا وهو يُدندنُ نغمتهُ المُفضّلة بانسجام.
+        وحين تُدمجُ بالكلماتِ الساحرة، والمشاهدِ الباهرة، تُصبحُ الكليبات الغنائية الوسيلةَ الأمثل لإيصال الرسائل الهادفة، وغرسِ القيمِ الإيجابيّة.
+        نُنتجُ لكَ كليباتٍ غنائيّة بأعلى مستوياتِ الاحترافيّة، بدءًا من اختيارِ الكلماتِ المُؤثرة، مرورًا بمراحلِ الإنتاجِ والإخراج، لتصلَ رسالتكَ قويةً، ويصبح لأعمالكَ بصمةٌ وهويّة.`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':4,
+        'classType':'col-6 col-md-3',
         'name':"توثيق الفعاليات",
-        'imgsrc':'04.png',
-        'showWindow':false
+        'imgSrc':'04.png',
+        'description':`نُرافقكَ في مُناسباتكَ الهامة من مؤتمراتٍ وندواتٍ وفعاليات، ونجعلُ بالكَ مُطمئنًا، إذ نتكفّلُ بتوثيقِ كافّة التفاصيلِ واللحظات بالصورِ الفوتوغراف، والفيديو، بمنتهى الكفاءة والاحترافيّة.`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':5,
+        'classType':'col-6 col-md-3',
         'name':"التصوير الفوتوغرافي",
-        'imgsrc':'05.png',
-        'showWindow':false
+        'imgSrc':'05.png',
+        'description':`لأنّ العين هي أسرعُ الحواسِ تأثرًا وتفاعلاً مع مُحيطها، فإنّنا نُولي التصويرَ اهتمامًا بالغًا، ونُوظِّفُ أقدرَ المُصورين وأكفأهم، كما نُواكبُ أحدث المُعدّاتِ والتقنيات في مجالِ التصوير.
+        لنجعلَ من كُلِّ صورةٍ نلتقطها مُتعةً بصريّة، وتُحفةً فنيّة.`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':6,
+        'classType':'col-6 col-md-3',
         'name':"البرامج التلفزيونية",
-        'imgsrc':'06.png',
-        'showWindow':false
+        'imgSrc':'06.png',
+        'description':`نقدِّمُ لكَ أفكارًا برامجيّة حصريّة في مختلفِ المجالات( التعليم/الثقافة/الصحة/ الفن والترفيه/المسابقات) ثم نُنتجها لكَ خصيصًا بحرفيّة عالية لتظهرَ علامتكَ التجاريّة بشكلٍ لائق.`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':7,
+        'classType':'col-6 col-md-3',
         'name':"الإنتاج الصوتي",
-        'imgsrc':'07.png',
-        'showWindow':false
+        'imgSrc':'07.png',
+        'description':`في حالةِ كُنتَ مُهتمًا بالإنتاجاتِ الصوتيّة كالإعلاناتِ الإذاعيّة أو البرامجِ الإذاعيّة أو البرودكاست ، فإنّنا نُقدِّمُ لكَ أفضلَ الأفكارِ والإنتاجات.`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':8,
+        'classType':'col-6 col-md-3',
         'name':"البصمة الصوتية والبصرية",
-        'imgsrc':'08.png',
-        'showWindow':false
+        'imgSrc':'08.png',
+        'description':`ولتعزيزِ علامتكَ التجاريّة، ودخولكَ عالمَ الابتكارِ والمُنافسة، نُقدِّمُ لكَ خدمةَ تحريكِ شعاركَ بشكلٍ جذّاب، وإنتاجِ بصمةٍ صوتيّة موسيقية تعكسُ هويتك ومجالك لتستخدمها كمقدمة في جميعِ أعمالكَ الترويجيّة. `,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':9,
+        'classType':'col-6 col-md-3',
         'name':"الحملات الإعلانية ",
-        'imgsrc':'09.png',
-        'showWindow':false
+        'imgSrc':'09.png',
+        'description':`يتكفّلُ خبراءُ التسويق في فريقنا بإعدادِ الخططِ الواعدة لحملاتكَ الإعلانيّة، لتوسيعِ رقعةِ نشاطك، واستقطابِ عُملائك، وزيادةِ مبيعاتك. `,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':10,
+        'classType':'col-6 col-md-3',
         'name':"الإعلانات التجارية",
-        'imgsrc':'10.png',
-        'showWindow':false
+        'imgSrc':'10.png',
+        'description':`لاشك وأنّ الانطباعَ الأول لدى عميلك هو الأهم، فهو ما يبقى في ذهنهِ مُطوّلاً، ويمنحهُ الثقة بمنتجك أو خدمتك، ولهذا تتنافسُ الشركاتُ لجعلِ إعلاناتها فريدةً وجذّابة.
+        أيّاً تكن رسالتك الإعلانيّة(تسويق منتج/ خدمة جديدة أو سابقة)  نضمنُ لك إيصالها بقالبٍ مُختلفٍ وشيّق، لنُضاعف أرقام مبيعاتك، ونُرسِّخ علامتكَ التجاريّة .  `,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':11,
+        'classType':'col-6 col-md-3',
         'name':"كتابة المحتوى",
-        'imgsrc':'11.png',
-        'showWindow':false
+        'imgSrc':'11.png',
+        'description':`الكلمة هي عِمادُ القرار ، ومُلتقى الأفكار.
+        يُقدّمُ لك خُبراؤنا في كتابة المحتوى جُملةً من الخدماتِ والاقتراحات للتعبيرِ عن أفكاركَ بشكلٍ احترافي: ( الصياغة المهنيّة لمشاريعكَ وأعمالك، كتابة البروفايل التعريفي لشركتك أو التقرير السنوي لإنجازاتك، إثراء محتوى منصات السوشل ميديا الخاصّة بنشاطك، الكتابة الإبداعيّة في مُختلفِ المجالات وبحسبِ ما تقتضيهِ رؤيتك).`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':12,
+        'classType':'col-6 col-md-3',
         'name':"تصميم وتطوير المواقع",
-        'imgsrc':'12.png',
-        'showWindow':false
+        'imgSrc':'12.png',
+        'description':`موقعكَ الإلكتروني هو واجهتكَ الأولى، ومقرُّ عملكَ الافتراضي، ولهذا فإننا نحرِصُ على تصميمهِ وإظهارهِ بشكلٍ عصريّ ليُحاكي جهودكَ على أرضِ الواقع.`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':13,
+        'classType':'col-6 col-md-3',
         'name':"التصميم الجرافيكي",
-        'imgsrc':'13.png',
-        'showWindow':false
+        'imgSrc':'13.png',
+        'description':`لأنَّ التصاميمَ المُبتكرة تُضفي الرُوحَ والجاذبيّة لأيِّ عمل، فإنّنا نُقدِّمُ الخدمات الأفضل في: 
+        الهويّة البصرية
+        الانفوجرافيك 
+        الموشن جرافيك 
+        التصميم ثلاثي الأبعاد والمتحرك`,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
       {
         'id':14,
+        'classType':'col-6 col-md-3',
         'name':"إدارة صفحات التواصل",
-        'imgsrc':'14.png',
-        'showWindow':false
+        'imgSrc':'14.png',
+        'description':`نُوظِّفُ الإقبال الجماهيري على منصاتِ التواصل الاجتماعي لصالحك، إذ يقومُ فريقنا من كاتبي المحتوى ومُصمِّمي المنشورات ومُختصي النشر وأدوات السوشل ميديا بإدارةِ صفحاتكَ الرقميّة بكفاءة، وعرضِ مشاريعكَ وخدماتكَ بطابعٍ جذّابٍ وشيّق. `,
+        'descriptionWindow':false,
+        'arrowVisible':false
       },
     ],
     this.socialMedia=[
@@ -300,7 +368,8 @@ export default({
       {
         'id':1,
         'title':'pic1',
-        'imgsrc':'01'
+        'imgsrc':'01',
+        
       },
       {
         'id':2,
@@ -334,6 +403,46 @@ export default({
       },
       {
         'id':8,
+        'title':'pic4',
+        'imgsrc':'08'
+      },
+      {
+        'id':9,
+        'title':'pic1',
+        'imgsrc':'01'
+      },
+      {
+        'id':10,
+        'title':'pic2',
+        'imgsrc':'02'
+      },
+      {
+        'id':11,
+        'title':'pic3',
+        'imgsrc':'03'
+      },
+      {
+        'id':12,
+        'title':'pic4',
+        'imgsrc':'04'
+      },
+      {
+        'id':13,
+        'title':'pic4',
+        'imgsrc':'05'
+      },
+      {
+        'id':14,
+        'title':'pic4',
+        'imgsrc':'06'
+      },
+      {
+        'id':15,
+        'title':'pic4',
+        'imgsrc':'07'
+      },
+      {
+        'id':16,
         'title':'pic4',
         'imgsrc':'08'
       },

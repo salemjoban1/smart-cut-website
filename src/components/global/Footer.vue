@@ -2,13 +2,6 @@
   <div class="footer">
     <div class="container">
       <div class="footer-content row">
-        <div class="direct-contact col-md-6">
-            <ul>
-              <li><i class="fas fa-envelope-open-text"></i><span>name.compony.com</span></li>
-              <li><i class="fas fa-phone"></i> <span>+967 771385262</span></li>
-              <li><i class="fas fa-map-marker-alt"></i><span>اليمن-حضرموت-المكلا</span> </li>
-            </ul>
-        </div>
         <div class="social-logo col-md-6">
             <ul>
               <li><i class="fab fa-youtube"></i></li>
@@ -19,6 +12,13 @@
             <div class="logo">
                   <a href="#"><img src="../../assets/LogoSolidWhite.png"></a>
             </div>
+        </div>
+        <div class="direct-contact col-md-6 ">
+            <ul>
+              <li><i class="fas fa-envelope-open-text"></i><span>name.compony.com</span></li>
+              <li><i class="fas fa-phone"></i> <span>771385262 967+</span></li>
+              <li><i class="fas fa-map-marker-alt"></i><span>اليمن-حضرموت-المكلا </span> </li>
+            </ul>
         </div>
       </div>
       </div>
@@ -39,6 +39,8 @@ export default {
 @import '../../scss/main.scss';
   .footer{
     &-content{
+      display: flex;
+      align-items:center;
       .social-logo{
         ul{
           padding:1rem;
@@ -49,14 +51,16 @@ export default {
               font-size:30px;
               color:#fff;
               cursor:pointer;
+              @include transition-ease;
               &:hover{
-                color:rgb(109, 107, 7)
+                @include transition-ease;
+                color:$secondColor;
               }
             }
           }
         }
           .logo{
-                padding:0.5rem 0;
+                padding:1rem 0;
                 img{
                     width:12rem;
                     height: $navHight - 2rem;
@@ -71,7 +75,7 @@ export default {
             padding-bottom: 1rem;
             i{
               font-size:20px;
-              padding:0.5rem;
+              padding-left:0.5rem;
             }
           }
         }
