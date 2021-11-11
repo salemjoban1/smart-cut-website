@@ -3,7 +3,7 @@
         <!-- justify the content of nav using inner-width div -->
         <div class="inner-width">
             <!-- menu-btn to show(in mobile)/hide(in disktop) nav menu -->
-            <div class="menu-toggle d-md-none" :class="{active:isSelected}"  @click="isSelected=!isSelected">
+            <div class="menu-toggle d-md-none" :class="{active:isSelected}"             @click="isSelected=!isSelected">
                 <!-- it has three lines apears when click the btn using class toggle 'active'-->
                 <span :class="{active:isSelected}" ></span>
                 <span :class="{active:isSelected}"></span>
@@ -13,14 +13,17 @@
             <ul class="nav-menu d-md-flex" :class="{active:isSelected}">
                 <li><a href="#" @click="hideOnClick">الرئيسية</a></li>
                 <li><a href="#about-us" @click="hideOnClick">من نحن</a></li>
-                <li><a href="#services" @click="hideOnClick">الخدمات</a></li>
+                <li><a href="#services" @click="hideOnClick">خدماتنا</a></li>
                 <li><a href="#works" @click="hideOnClick">أعمالنا</a></li>
-                <li><a href="#clients" @click="hideOnClick">عملائنا</a></li>
+                <li><a href="#clients" @click="hideOnClick">عملاؤنا</a></li>
                 <li><a href="#contact" @click="hideOnClick">تواصل معنا</a></li>
             </ul>
             <!-- block contain logo pic with link to the main page -->
             <div class="logo">
-                <a href="#"><img src="../../assets/logo.png"></a>
+                <a href="#">
+                    <img :src="require(`../../assets/${logo.imgSrc}`)" 
+                         :alt="logo.altText">
+                </a>
             </div>
         </div>
     </div>
@@ -32,6 +35,9 @@ export default({
         return{
             isSelected:false,
         }
+    },
+    props:{
+        logo:Object
     },
     methods:{
         // to hide the menu window whenever clicked any menu tab
@@ -50,7 +56,10 @@ export default({
         top:0;
         z-index:200;//be the highest layer of page components
         background-color:#fff;
-        box-shadow: 2px 2px 5px rgb(209, 209, 208);
+        -webkit-box-shadow: 2px 2px 5px rgb(209, 209, 208);
+        -moz-box-shadow: 2px 2px 5px rgb(209, 209, 208);
+        -ms-box-shadow: 2px 2px 5px rgb(209, 209, 208);
+         box-shadow: 2px 2px 5px rgb(209, 209, 208);
         width:100%;
         padding:1rem;
         height:$navHight;
@@ -78,6 +87,9 @@ export default({
                         @include transition-ease;
                         &.active{
                             width:28px;
+                            -webkit-transform:rotate(45deg) translate(4px,7px);
+                            -moz-transform:rotate(45deg) translate(4px,7px);
+                            -ms-transform:rotate(45deg) translate(4px,7px);
                             transform:rotate(45deg) translate(4px,7px);
                             @include transition-ease;
                         }
@@ -96,6 +108,9 @@ export default({
                         @include transition-ease;
                         &.active{
                             width:28px;
+                            -webkit-transform:rotate(-45deg) translate(3px,-7px);
+                            -moz-transform:rotate(-45deg) translate(3px,-7px);
+                            -ms-transform:rotate(-45deg) translate(3px,-7px);
                             transform:rotate(-45deg) translate(3px,-7px);
                             @include transition-ease;
                         }
@@ -132,7 +147,7 @@ export default({
             }
             &.active{
                 animation-name:movmentIn;
-                animation-duration: 0.3s;
+                animation-duration: 0.5s;
                 display: flex;
                 flex-flow: column wrap;
                 justify-content: center;

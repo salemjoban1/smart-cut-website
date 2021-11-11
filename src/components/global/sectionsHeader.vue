@@ -1,17 +1,16 @@
 <template>
-    <div class="header">
-        <header class="main-headers">
-                    <h1 :style="{'color':header.color}">{{header.title}}</h1>
-                    <span class="under-line"></span>
-        </header>
-    </div>
+    <header class="main-headers">
+                <h1 :style="{'color':title.color}">{{title.title}}</h1>
+                <span class="under-line"></span>
+    </header>
+    
 </template>
 
 <script>
 export default {
-    name:"header",
+    name:"main-headers",
     props:{
-        header:Object
+        title:Object
     }
 }
 </script>

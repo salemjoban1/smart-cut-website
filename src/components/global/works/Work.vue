@@ -24,7 +24,7 @@ export default {
         .content{
             position: relative;
             overflow:hidden;
-            box-shadow: 0 2px 15px;
+            box-shadow: 0 2px 15px rgb(85, 83, 83);
             img{
                 width:100%;
                 transition: 0.5s ease-in-out;

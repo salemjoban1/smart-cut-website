@@ -4,8 +4,6 @@
     margin:0;
     box-sizing: border-box;
     direction: rtl;
-    // font-family: Helvetica ,Arial, sans-serif;
-    // error fontawesom not working becous of it 
 }
 body{
     background-color:rgb(182, 182, 182);
@@ -27,5 +25,8 @@ $navHight:5.5rem;
 
 //mixin
 @mixin transition-ease{
+    -webkit-transition:all 0.4s ease-in-out;
+    -moz-transition:all 0.4s ease-in-out;
+    -ms-ransition:all 0.4s ease-in-out;
     transition:all 0.4s ease-in-out;
 }

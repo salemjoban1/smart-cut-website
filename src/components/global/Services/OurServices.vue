@@ -7,15 +7,17 @@
                 :key="index" 
                 :service="service"
                 :serviceDescription="serviceDescription"
-                @click="toggleDescriptionWindow(service),this.test()"/>
+                @click="toggleDescriptionWindow(service)"
+                @close-window ="closeService()"/>
             </div>
-            <div v-if="mobileView" class="row g-0" id="full-content">
+            <div v-else-if="mobileView" class="row g-0" id="full-content">
                 <service
                 v-for="(service,index) in servicesWithDescriptionMobile" 
                 :key="index" 
                 :service="service"
                 :serviceDescription="serviceDescription"
-                @click="toggleDescriptionWindow(service)"/>
+                @click="toggleDescriptionWindow(service)"
+                @close-window ="closeService()"/>
             </div>
         </div>
     </div>
@@ -38,6 +40,7 @@ export default {
             ServiceMaxHeight: 0
         }
     },
+    emits:['close-window'],
     props:{
         services:Object,
         mobileView:Boolean
@@ -162,14 +165,17 @@ export default {
                             if ((this.servicesWithDescriptionMobile[i].id).includes(service.id))
                             {
                                 this.serviceDescription = service.description;
-                                this.servicesWithDescriptionMobile[i].isOpen = true; 
+                                this.servicesWithDescriptionMobile[i].isOpen = true;
+                                this.openedWindowIndex = i; 
                             }
                         }
                         else if (this.servicesWithDescriptionMobile[i].id === service.id)
                         {
                             this.servicesWithDescriptionMobile[i].arrowVisible = true;
+                            this.openedServiceIndex = i;
                         }
-                        else{
+                        else
+                        {
                             this.servicesWithDescriptionMobile[i].arrowVisible = false;
                         }
                     }
@@ -179,12 +185,19 @@ export default {
         },
         closeService:function(){
             this.servicesWithDescription[this.openedServiceIndex].arrowVisible = false;
+             this.servicesWithDescriptionMobile[this.openedServiceIndex].arrowVisible = false;
             this.servicesWithDescription[this.openedWindowIndex].isOpen = false;
+            this.servicesWithDescriptionMobile[this.openedWindowIndex].isOpen = false;
         },
         test:function(){
-            console.log(this.openedServiceIndex);
+            console.log(this.servicesWithDescriptionMobile);
             console.log(this.openedWindowIndex);
             
+        }
+    },
+    watch:{
+        mobileView:function(val){
+            this.closeService();
         }
     },
     created(){
@@ -193,6 +206,7 @@ export default {
     },
     mounted(){
         this.matchServicesHeight();
+        // this.test();
     },
     updated(){
         this.matchServicesHeight();
@@ -200,8 +214,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    .row{
-        margin:0 !important
-    }
+<style lang="scss">
+@import '../../../scss/main.scss';
+    
 </style>

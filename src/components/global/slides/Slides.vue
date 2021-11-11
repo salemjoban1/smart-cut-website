@@ -5,19 +5,24 @@
                 <span class="inner-width"  
                     v-for="(slide,index) in slides" 
                     :key="index"
-                    @click="updateCurrentSlide(index)">
+                    @click="switchToSlider(index + 1)">
                     <span class="line" :class="{active:index+1 === currentSlide}"></span>
                 </span>
             </div>
                 <Slide v-for="(slide,index) in slides" :key="index">
-                    <transition name="slide-move">
+                    <transition name="slide" appear>
                         <div v-show=" currentSlide === index+1" class="slide-inner"
                         :style="{'background-image':'url(' + require(`../../../assets/slides/${slide.imgsrc}.png`) + ')'}">
                             <div class="content">
                                 <h1 class="header">{{slide.header}}</h1>
                                 <h3 class="subHeader">{{slide.subHeader}}</h3>
                                 <div v-show="slide.hasBtn && index + 1 === currentSlide">
-                                    <a href="#contact"><button class="btn-contact">{{slide.btn}}</button></a>
+                                    <a >
+                                        <button class="btn-contact" 
+                                                @click="previousSlide()">
+                                            {{slide.btn}}
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -33,14 +38,15 @@ import Slide from './Slide.vue'
 export default {
     name:'slides',
     props:{
-        slides:Array
+        slides:Array,
     },
     data(){
         return{
             slideLen:this.slides.length,
             currentSlide:1,
             lineActive:true,
-            slideInterval:null
+            slideInterval:null,
+            timer:7000
         }
         
     },
@@ -49,24 +55,42 @@ export default {
     },
     methods: {
         updateCurrentSlide:function(index){
-            this.currentSlide = index + 1;
+            this.currentSlide = index;
         },
+        nextSlide:function(steps = 1){
+            const index = this.currentSlide < this.slideLen ? this.currentSlide + steps:1;
+            this.updateCurrentSlide(index);
+            this.startSlideTimer();
+        },
+        previousSlide:function(steps = -1){
+            const index = this.currentSlide > 1 ? this.currentSlide + steps:1;
+            this.updateCurrentSlide(index);
+            this.startSlideTimer();
+        },
+        switchToSlider:function(index){
+            const steps = index - this.currentSlide;
+            if (steps > 0){
+                this.nextSlide(steps);
+            }else{
+                this.previousSlide(steps);
 
+            }
+        },
+        startSlideTimer:function(){
+            this.stopSlideTimer();
+            this.slideInterval = setInterval(() => {
+            this.nextSlide();
+        }, this.timer);
+        },
+        stopSlideTimer:function(){
+            clearInterval(this.slideInterval);
+        }
     },
     mounted(){
-        this.slideInterval = setInterval(() => {
-            if (this.currentSlide < this.slideLen)
-            {
-                this.currentSlide++;
-            }
-            else
-            {
-                this.currentSlide = 1;
-            }
-        }, 4000);
+        this.startSlideTimer();
     },
     beforeDestroy(){
-        clearInterval(this.slideInterval);
+        this.stopSlideTimer();
     }
 
 }
@@ -84,8 +108,8 @@ export default {
             z-index:5;
             width:50px;
             position:absolute;
-            right:3%;
-            top:40%;
+            right:4vw;
+            top: 28vh;
             padding: 0 0.5rem;
             display: flex;
             flex-direction: column;       
@@ -143,12 +167,18 @@ export default {
                 width:70%;
                 .header{
                     color:#fff;
+                    animation-delay:0.5s;
+                    animation-name:cutTextDownFromTop;
+                    animation-duration:2s;
                 }
                 .subHeader{
                     padding:25px 0;
                     color:#fff;
                     font-size:1.5rem;
                     font-weight: normal;
+                    animation-delay:0.5s;
+                    animation-name:cutTextDownFromTop;
+                    animation-duration:2s;
                 }
                 a{
                     width:10rem;
@@ -205,22 +235,36 @@ export default {
             }
             
         }
-        .slide-move-enter-active{
-            transition: all 1s ease-in-out;
+        .slide-enter-active,
+        .slide-leave-active{
+            transition: all 1.5s ease-in-out;
         }
-        .slide-move-leave-active {
-            transition: all 0.5s ease-in-out;
-            transform:translateX(-50);
-            }
-
-        .slide-move-enter-from{
-            transition: all 0.5s ease-in-out;
-            transform:translateX(0);
+        .slide-enter-from{
+            transform:translateX(-100%);
         }
-        .slide-move-leave-to {
-            opacity: 0;
+        .slide-leave-to {
             transform:translateX(0);
          }
+        // .fade-enter-active,
+        // .fade-leave-active{
+        //     transition: all 1.5s ease-in-out;
+        // }
+        //  .fade-enter-from{
+        //      opacity:0;
+        //  }
+        //  .fade-leave-to{
+        //      opacity: 1;
+        //  }
     }
+    // animation
+    @keyframes cutTextDownFromTop {
+    from {
+        clip-path: inset(0 0 100% 0);
+    }
+    to {
+        clip-path: inset(0 0 -30% 0);
+        opacity: 1;
+    }
+}
     
 </style>

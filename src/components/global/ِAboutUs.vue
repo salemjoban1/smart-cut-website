@@ -1,34 +1,67 @@
 <template>
     <section class="about-us">
         <div class="container">
-            <div class="row justify-content-between">
+            <div class="row justify-content-between" v-if="!mobileView">
                 <div class="pictures col-12 col-md-4">
                     <!-- div to make border -->
                     <div class="inner-border">
-                        <img class="ceo-img" src="../../assets/personal-pic.png">
+                        <img class="ceo-img" src="../../assets/personal-pic.png"
+                             alt="speaker image">
                         <div class="descrip">
                             <h3>عبد الرحمن جوبان</h3>
                             <h5>منتج وصانع أفلام</h5>
                         </div>
                     </div>
                 </div>
-                <div class="description col-12 col-md-7 ">
+                <div class="description col-12 col-md-7">
                     <p>
                         <!-- main text always be shown -->
                         {{aboutText.mainText}}
                         <!-- read more btn to show or hide complement text and hide btn itself-->
                         <span class="read-btn more"
                             :class="{show:readMore}"
-                            @click="readMore=!readMore,readLess=!readLess">اكثر</span>
+                            @click="readMore=!readMore,readLess=!readLess">عرض أكثر</span>
                         <!-- complement text -->
                         <span class="less" :class="{show:readLess}">
                             {{aboutText.textMore}}
                             <!-- less btn to show hide complement text and hide btn itself -->
                             <span class="read-btn less"
                             :class="{show:readLess}" 
-                            @click="readMore=!readMore,readLess=!readLess">اقل</span>
+                            @click="readMore=!readMore,readLess=!readLess">عرض أقل</span>
                         </span>
                     </p>
+                </div>
+            </div>
+            <div class="row justify-content-center" v-else-if="mobileView">
+                <div class="description col-12 col-md-7">
+                    <p>
+                        <!-- main text always be shown -->
+                        {{aboutText.mainText}}
+                        <!-- read more btn to show or hide complement text and hide btn itself-->
+                        <span class="read-btn more"
+                            :class="{show:readMore}"
+                            @click="readMore=!readMore,readLess=!readLess"> عرض أكثر</span>
+                        <!-- complement text -->
+                        <span class="less" :class="{show:readLess}">
+                            {{aboutText.textMore}}
+                            <!-- less btn to show hide complement text and hide btn itself -->
+                            <span class="read-btn less"
+                            :class="{show:readLess}" 
+                            @click="readMore=!readMore,readLess=!readLess">عرض أقل</span>
+                        </span>
+                    </p>
+                </div>
+                 <div class="pictures col-12 col-md-4"
+                    :style="direction">
+                    <!-- div to make border -->
+                    <div class="inner-border">
+                        <img class="ceo-img" src="../../assets/personal-pic.png"
+                             alt="speaker image">
+                        <div class="descrip">
+                            <h3>عبد الرحمن جوبان</h3>
+                            <h5>منتج وصانع أفلام</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,14 +73,16 @@
 export default {
     name:'about-us',
     props:{
-        aboutText:Object
+        aboutText:Object,
+        mobileView:Boolean
     },
     data(){
         return{
             readMore:true,
             readLess:false
         }
-    },
+    }
+    
 }
 </script>
 
@@ -62,6 +97,7 @@ export default {
                 line-height: 2;
                 font-weight: 400;
                 text-align: justify;
+                white-space: break-spaces;
             }
             .read-btn{
                 color:#012c97;

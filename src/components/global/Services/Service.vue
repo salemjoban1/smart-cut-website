@@ -4,18 +4,16 @@
         <div class="content-box" v-if ="!service.descriptionWindow" >
             <div class="inner-content"
                 :class="{show:service.arrowVisible}">
-                
                 <img :src="require(`../../../assets/services/${service.imgSrc}`)"
-                alt="">
+                     :alt="service.altText">
                 <h4>{{service.name}}</h4>
-
             </div>
         </div>
         <div v-else-if ="service.descriptionWindow"
             class="description-window"
             :class="{show:service.isOpen}">
             <div class="top-part">
-                <div class="close-btn">
+                <div class="close-btn" @click="$emit('close-window')">
                     <span></span>
                 </div>
             </div>
@@ -48,7 +46,7 @@ export default {
                 align-items: center;
                 justify-content: center;
                 border:solid 2px $primeColor;
-                padding:1.5rem 0;
+                padding:1.5rem 0.5rem;
                 cursor:pointer;
                 &::after{
                     display:none;
@@ -61,6 +59,7 @@ export default {
                     border-width:17px;
                     border-style:solid;
                     border-color:transparent transparent blue transparent;
+                    @include transition-ease;
                 }
                 &.show{
                     &::after{
@@ -82,11 +81,15 @@ export default {
             }
         }
         .description-window{
+            overflow: hidden;
             display:none;
             flex-direction: column;
             // replace with variable
             background-color: #fff;
             border:2px solid blue;
+            animation-duration:1s;
+            animation-name:ease-open-service;
+            animation-fill-mode: forwards;
             .top-part{
                 background-color: blue;
                 display: flex;
@@ -118,11 +121,23 @@ export default {
             p{
                 margin:2rem;
                 word-spacing: 3px;
+                font-weight: 500;
             }
             &.show{
                 display:flex;
+                animation-duration:1s;
+                animation-name:ease-open-service;
             }
         }
         
+    }
+    // animation
+    @keyframes ease-open-service {
+        0%{
+            height: 0;
+        }
+        100%{
+            height: 100%;
+        }
     }
 </style>

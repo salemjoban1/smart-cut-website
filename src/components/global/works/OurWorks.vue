@@ -1,26 +1,33 @@
 <template>
   <div class="our-works">
       <div class="container">
+          <!-- if not in mobile view -->
           <div v-if="!mobileView">
+                <!-- loop in special array which has after 4 services one description box for them-->
                 <div class="works-group row justify-center g-3" 
                 v-for="(worksGroup,parent_index) in worksDevided" 
                 :key="parent_index"
                 v-show="currentWorksGroup === parent_index +1">
+                    <!-- loop in each object of parent array to show each work div -->
                     <Work class="col-md-6 col-lg-4" 
                     v-for="(work,index) in worksGroup" 
                     :key="index" :work="work"
-                    @click="playVideo(parent_index,index)"/>
+                    @click="playVideo(parent_index,index)"/> <!-- enter parent index and child index to find the specific element index-->
+                    <!-- youtube player window shows when clicks video poster -->
                     <div class="video-player"
-                        :class="{open:openPlayer}">
-                        {{videoInfo}}
+                        :class="{open:openPlayer}" @click="openPlayer=false">
+                        <div class="close-btn">
+                            <span></span>
+                        </div>
+                        <iframe width="100%" height="100%" :src="`https://www.youtube.com/embed/${videoInfo}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
-            <div v-if="mobileView">
+            <div v-else-if="mobileView">
                 <div class="works-group row justify-center g-3" 
-                v-for="(work,index) in allWorks" 
-                :key="index"
-                v-show="mobileCurrentWorks === index +1">
+                    v-for="(work,index) in allWorks" 
+                    :key="index"
+                    v-show="mobileCurrentWorks === index +1">
                     <Work class="col-md-6 col-lg-4" :work="work"/>
                 </div>
             </div>
@@ -162,8 +169,8 @@ export default {
                     if ((parent_index === i) && (index === j))
                     {
                         this.openPlayer = !this.openPlayer;
-                        this.videoInfo = this.worksDevided[i][j].imgsrc;
-                        console.log(this.worksDevided[i][j].imgsrc);
+                        this.videoInfo = this.worksDevided[i][j].videoLink;
+                        console.log(videoInfo);
                     }
                 }
             }
@@ -181,16 +188,52 @@ export default {
     .our-works{
         .works-group{
             position:relative;
+            @include transition-ease;
             .video-player{
                 display:none;
-                position:absolute;
+                position:fixed;
+                margin-top:0;
                 top:0;
                 right:0;
                 width:100%;
-                background-color:rgb(0, 0, 0);
-                height:80vh;
+                background-color:rgba(0, 0, 0, 0.644);
+                height:100vh;
+                z-index:201;
+                padding:4.5rem 4rem;
+                animation-duration: 0.8s;
+                animation-name:close-player;
+                opacity: 1;
                 &.open{
-                    display:block
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    animation-duration: 0.8s;
+                    animation-name:open-player;
+                }  
+                .close-btn{
+                    position: absolute;
+                    top:1.5rem;
+                    right:5rem;
+                    color:#fff;
+                    cursor: pointer;
+                    span{
+                        position: relative;
+                        display: inline-block;
+                        width:25px;
+                        height:3px;
+                        background-color: #fff;
+                        transform:rotate(45deg) ;
+                        &::after{
+                            content:'';
+                            position: absolute;
+                            top:5px;
+                            right:0;
+                            width:25px;
+                            height:3px;
+                            background-color: #fff;
+                            transform:rotate(-90deg) translate(5px,0);
+                        }
+                    }
                 }
             }
         }
@@ -201,6 +244,7 @@ export default {
             justify-content:center;
             padding-bottom:2rem;
             margin-top:1rem;
+            @include transition-ease;
             .right-arrow{
                 padding-left:1rem;
                 width:1.5rem;
@@ -243,6 +287,7 @@ export default {
                 justify-content: center;
                 align-items:center;
                 padding:0 4rem;
+                @include transition-ease;
                 .condition{
                     height:100%;
                     display: flex;
@@ -256,12 +301,16 @@ export default {
                     margin-left:0.6rem;
                     background-color:rgb(155, 155, 155);
                     cursor:pointer;
+                    opacity:0.8;
+                    @include transition-ease;
                 }
                 span.active{
+                    opacity:1;
                     width:2.3rem;
                     border-radius: 4px;
                     margin-left:0.6rem;
                     background-color:$primeColor;
+                    @include transition-ease;
                 }
             }
             .left-arrow{
@@ -305,4 +354,23 @@ export default {
         }
     }
 
+// animation
+@keyframes open-player{
+    0%{
+        right:-100%;
+        opacity: 0;
+    }
+    100%{
+        right:0;
+        opacity: 1;
+    }
+}
+@keyframes close-player{
+    0%{
+        right:0
+    }
+    100%{
+        right:-100%;
+    }
+}
 </style>

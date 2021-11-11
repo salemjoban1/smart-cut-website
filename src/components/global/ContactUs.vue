@@ -1,23 +1,60 @@
 <template>
     <div class="contact-us container">
-        <form action="" class="form-group row">
-                <input type="text" class="person-name col-md-5" placeholder="الأسم">
-                <input type="tel" class="mobile col-md-5" placeholder="رقم الجوال">
-                <input type="text" class="comp-name col-md-5" placeholder="اسم الشركة">
-                <input type="email" class="email col-md-5"  placeholder="عنوان الإيميل">
-                <textarea name="type" class="desc col-md-10" cols="" rows="" placeholder="اكتب طلبك..."></textarea>
-                <!-- <div class="empty col-md-2"></div> -->
-                <!-- error => how to make item take full page with flex  -->
-                <div class="row">
-                    <input type="submit" value="ارسال" class="submit col-md-10">
-                </div>
+        <form class="form-group row g-3" @submit.prevent="sendEmail">
+            <input type="text" class="person-name col-12 col-md-6" placeholder="الأسم" v-model="fromName" name="fromName">
+
+            <input type="tel" class="mobile col-12 col-md-6" placeholder="رقم الجوال" v-model="mobile" name="mobile">
+
+            <input type="text" class="comp-name col-12 col-md-6" placeholder="اسم الشركة" v-model="companyName" name="companyName">
+
+            <input type="email" class="email col-12 col-md-6"  placeholder="عنوان الإيميل" v-model="email" name="email">
+
+            <textarea type="textarea" class="desc col-md-12" cols="" rows="" placeholder="اكتب طلبك..." v-model="message" name="message">
+            </textarea>
+
+            <input type="submit" value="ارسال" class="submit col-2">
         </form>
     </div>
 </template>
 
 <script>
+import emailjs from 'emailjs-com';
 export default {
-    name:'contact-us'
+    name:'contact-us',
+    props:{
+        mobileView:Boolean
+    },
+    date(){
+        return{
+            fromName:'',
+            mobile:'',
+            companyName:'',
+            email:'',
+            message:''
+
+        }
+    },
+    methods: {
+        sendEmail: (e) => {
+            emailjs.sendForm('service_1efp16h', 'template_x0kkfjd', e.target, 'user_PgzY5Zzyu339JbOgZh8VC')
+                .then((result) => {
+                    console.log('SUCCESS!', result.status, result.text);
+                }, (error) => {
+                    console.log('FAILED...', error);
+                });
+                resetFields();
+        },
+        formValidation:function(){
+
+        },
+        resetFields:function(){
+            this.fromName = ' ';
+            this.mobile = ' ';
+            this.companyName = ' ';
+            this.email = ' ';
+            this.message = ' ';
+        }
+  }
 }
 </script>
 
@@ -26,40 +63,32 @@ export default {
     .contact-us{
         .form-group{
             padding:1.2rem;
-            justify-content: center;
             input,textarea{
                 padding:0.7rem 0.5rem;
                 border:0;
                 outline:0;
-                
-                // margin:0.5rem;
+                @include transition-ease;
             }
             .person-name,.mobile,.comp-name,.email{
                 background-color: #fff;
-                margin:0.5rem;
+                border-left:solid 10px $primeColor;
             }
             textarea{
-                margin:0.5rem;
-            }
-            input{
-                 
+                border-left:solid 10px $primeColor;
             }
             input:focus{
-                border-bottom: 2px solid $primeColor;
                 
+                @include transition-ease;
             }
-            .desc{
-                // width:85%;
+            .submit{
+                width:fit-content !important;
+                border:0;
+                background-color:$secondColor;
+                padding:0.2rem 1.4rem;
+                align-self: flex-start;
             }
         }
-        .submit{
-            width:fit-content;
-            border:0;
-            display:block;
-            background-color:$secondColor;
-            padding:0.2rem 1.4rem;
-            align-self: flex-start;
-        }
+        
     }
     
 </style>
