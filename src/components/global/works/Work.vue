@@ -1,7 +1,7 @@
 <template>
   <div class="work">
       <div class="content">
-        <img :src="require(`../../../assets/works/${work.imgsrc}.png`)" alt="">
+        <img :src="require(`../../../assets/works/${work.imgsrc}`)" alt="">
         <div class="youtube-icon">
             <div class="inner-shape"></div>
         </div>
@@ -19,15 +19,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../../scss/main.scss';
     .work{
         overflow:hidden;
+        padding:0.7rem;
         .content{
             position: relative;
             overflow:hidden;
             box-shadow: 0 2px 15px rgb(85, 83, 83);
             img{
                 width:100%;
-                transition: 0.5s ease-in-out;
+                @include transition-ease;
             }
             .youtube-icon{
                 position: absolute;
@@ -41,7 +43,7 @@ export default {
                 display:flex;
                 justify-content: center;
                 align-items: center;
-                transition: 0.5s ease-in-out;
+                @include transition-ease;
                 .inner-shape{
                     width: 0;
                     height: 0;
@@ -49,19 +51,16 @@ export default {
                     border-right: 0;
                     border-left: 1.6rem solid #fff;
                 }
-                // &:hover,&:active{
-                //         background-color:red;
-                //     }
             }
             &:hover img,&:active img{
                 transform: scale(1.2,1.2);
                 cursor: pointer;
-                transition: 0.5s ease-in-out;
+                @include transition-ease;
             }
             &:hover .youtube-icon,&:active .youtube-icon{
                 background-color:red;
                 cursor: pointer;
-                transition: 0.5s ease-in-out;
+                @include transition-ease;
             }
         }
         

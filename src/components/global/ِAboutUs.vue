@@ -1,7 +1,8 @@
 <template>
     <section class="about-us">
         <div class="container">
-            <div class="row justify-content-between" v-if="!mobileView">
+            <div v-if="!mobileView"
+                 class="row big-screen">
                 <div class="pictures col-12 col-md-4">
                     <!-- div to make border -->
                     <div class="inner-border">
@@ -32,7 +33,8 @@
                     </p>
                 </div>
             </div>
-            <div class="row justify-content-center" v-else-if="mobileView">
+            <div v-else-if="mobileView"
+                 class="row mobile-screen">
                 <div class="description col-12 col-md-7">
                     <p>
                         <!-- main text always be shown -->
@@ -89,6 +91,12 @@ export default {
 <style lang="scss" scoped>
 @import '../../scss/main.scss';
     .about-us{
+        .big-screen{
+            justify-content:space-between ;
+        }
+        .mobile-screen{
+            justify-content:center ;
+        }
         .description{
             overflow:hidden;
             padding:2rem 1rem;

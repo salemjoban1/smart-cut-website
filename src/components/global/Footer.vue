@@ -8,7 +8,7 @@
             <ul class="col ">
               <!-- take data from object ,and repeat as many items in the object -->
               <li v-for="tool in socialMedia" :key="tool.id">
-                <a :href="tool.link">
+                <a :href="tool.link" target="_blank">
                   <i :class="tool.iconClass"></i>
                 </a>
               </li>
@@ -50,6 +50,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/main.scss';
+  .container{
+    margin:0 auto;
+  }
   .footer{
     &-content{
       .social-logo{

@@ -1,7 +1,11 @@
 <template>
+    <!-- services.classType detrmine if its full page width(description window), or service box width  -->
     <div class="service"
         :class="service.classType">
+        <!-- has service main contents (img-title-border) -->
         <div class="content-box" v-if ="!service.descriptionWindow" >
+            <!-- 'inner-content' wrap contents in a border box and 'show' class
+                shows the arrow based on service arrow attribute value  -->
             <div class="inner-content"
                 :class="{show:service.arrowVisible}">
                 <img :src="require(`../../../assets/services/${service.imgSrc}`)"
@@ -9,10 +13,14 @@
                 <h4>{{service.name}}</h4>
             </div>
         </div>
+        <!-- has description window contents -->
+        <!-- 'description-window' wrap contents in a border box and 'show' class
+                shows the descreiption box based on service isopen attribute value  -->
         <div v-else-if ="service.descriptionWindow"
             class="description-window"
             :class="{show:service.isOpen}">
             <div class="top-part">
+                <!-- when clicked emits event to parent component -->
                 <div class="close-btn" @click="$emit('close-window')">
                     <span></span>
                 </div>
@@ -27,8 +35,10 @@
 export default {
     name:'service',
     props:{
-        service:Object,
-        serviceDescription:String,
+        //comes from our services component
+        service:Object, 
+        //comes from our services component changing whenever clicked to service box
+        serviceDescription:String, 
     },
 }
 </script>
@@ -36,7 +46,9 @@ export default {
 <style lang="scss" scoped>
 @import '../../../scss/main.scss';
     .service{
-        padding:14px 0 0 18px;
+        // space between service boxes
+        padding:14px 0 0 14px;
+        // 'relative'to move arrow besed on this div
         position:relative;
         .content-box{
             .inner-content{
@@ -48,6 +60,7 @@ export default {
                 border:solid 2px $primeColor;
                 padding:1.5rem 0.5rem;
                 cursor:pointer;
+                // arrow style
                 &::after{
                     display:none;
                     content:'';
@@ -58,7 +71,7 @@ export default {
                     right:40%;
                     border-width:17px;
                     border-style:solid;
-                    border-color:transparent transparent blue transparent;
+                    border-color:transparent transparent rgb(0, 0, 255) transparent;
                     @include transition-ease;
                 }
                 &.show{
@@ -67,7 +80,11 @@ export default {
                     }
                 }
                 &:hover{
+                    -webkit-box-shadow: -1px 6px 9px 2px #c1c2d6;
+                    -moz-box-shadow: -1px 6px 9px 2px #c1c2d6;
+                    -ms-box-shadow: -1px 6px 9px 2px #c1c2d6;
                     box-shadow: -1px 6px 9px 2px #c1c2d6;
+                    
                 }
                 img{
                     width:70px;
@@ -81,17 +98,23 @@ export default {
             }
         }
         .description-window{
+            position: relative;
             overflow: hidden;
             display:none;
             flex-direction: column;
-            // replace with variable
             background-color: #fff;
-            border:2px solid blue;
+            border:2px solid rgb(0, 0, 255);
+            -webkit-animation-duration:1s;
+            -moz-animation-duration:1s;
+            -ms-animation-duration:1s;
             animation-duration:1s;
+            -webkit-animation-name:ease-open-service;
+            -moz-animation-name:ease-open-service;
+            -ms-animation-name:ease-open-service;
             animation-name:ease-open-service;
-            animation-fill-mode: forwards;
             .top-part{
-                background-color: blue;
+                margin:0;
+                background-color: rgb(0, 0, 255);
                 display: flex;
                 justify-content: flex-end;
                 padding:0 0 0.5rem 0.5rem;
@@ -104,6 +127,9 @@ export default {
                         width:15px;
                         height:2px;
                         background-color: #fff;
+                        -webkit-transform:rotate(45deg);
+                        -moz-transform:rotate(45deg) ;
+                        -ms-transform:rotate(45deg) ;
                         transform:rotate(45deg) ;
                         &::after{
                             content:'';
@@ -113,6 +139,9 @@ export default {
                             width:15px;
                             height:2px;
                             background-color: #fff;
+                            -webkit-transform:rotate(-90deg) translate(5px,0);
+                            -moz-transform:rotate(-90deg) translate(5px,0);
+                            -ms-transform:rotate(-90deg) translate(5px,0);
                             transform:rotate(-90deg) translate(5px,0);
                         }
                     }
@@ -125,7 +154,13 @@ export default {
             }
             &.show{
                 display:flex;
+                -webkit-animation-duration:1s;
+                -moz-animation-duration:1s;
+                -ms-animation-duration:1s;
                 animation-duration:1s;
+                -webkit-animation-name:ease-open-service;
+                -moz-animation-name:ease-open-service;
+                -ms-animation-name:ease-open-service;
                 animation-name:ease-open-service;
             }
         }

@@ -35,7 +35,6 @@
                     :directContact="directContact"
                     :logo="logo"/>
           </div>
-        <!-- <router-view /> -->
       </div>
 </template>
 <script>
@@ -170,7 +169,7 @@ export default({
       ],
     this.aboutText=
             {mainText:`الحياةُ لا تتوقفُ عن منحِ الفُرص، لكنّها لمن ينتهزها.
-                 على امتدادِ رحلةٍ قاربتْ ١٥ عامًا في مجالِ الإعلان والإنتاجِ المرئي كوّنا تجربةً مردُّها حُبُّ المعرفة والاطِّلاع، وخبرةً منبعها العملُ في مُختلفِ البقاعِ والأصقاع. ثم وضعنا خُلاصةَ خبراتنا في مشروعٍ يُعبِّرُ عن كياننا وأهدافنا. في العاشر من أكتوبر عام ٢٠١٩ ميلاديّة، أسسنا 'Smart Cut' في حضرموت اليمن، لتكونَ وِجهةً وواجهةً لعلاقاتٍ قويّة، وإنتاجاتٍ نوعيّة مع أكبرِ الشركات والمُؤسسات في المنطقة. جمعنا طاقمًا مُحترفًا طموحًا، فأرسينا دعائمَ الثقة مع عملائنا، واكتسبنا سُمعةً طيّبة لالتزامنا الجديّة، الاحترافيّة، المرونة في أشدِّ الضغوط، والدقّة في المواعيدِ وتسليمِ الأعمال. `,
+على امتدادِ رحلةٍ قاربتْ ١٥ عامًا في مجالِ الإعلان والإنتاجِ المرئي كوّنا تجربةً مردُّها حُبُّ المعرفة والاطِّلاع، وخبرةً منبعها العملُ في مُختلفِ البقاعِ والأصقاع. ثم وضعنا خُلاصةَ خبراتنا في مشروعٍ يُعبِّرُ عن كياننا وأهدافنا. في العاشر من أكتوبر عام ٢٠١٩ ميلاديّة،  أسسنا 'Smart Cut' في حضرموت اليمن، لتكونَ وِجهةً وواجهةً لعلاقاتٍ قويّة، وإنتاجاتٍ نوعيّة مع أكبرِ الشركات والمُؤسسات في المنطقة. جمعنا طاقمًا مُحترفًا طموحًا، فأرسينا دعائمَ الثقة مع عملائنا، واكتسبنا سُمعةً طيّبة لالتزامنا الجديّة، الاحترافيّة، المرونة في أشدِّ الضغوط، والدقّة في المواعيدِ وتسليمِ الأعمال. `,
                  textMore:`ولأنّ هدفنا مُنذُ البداية لم يرتبط بالوصولِ السريع، ولا بالإطراءاتِ العابرة، بل بالقدرةِ على الإلهامِ والتأثير، فإنّنا نستشرِفُ الفُرصَ المُستقبليّة للتوسّع، وتجاوز الحدودِ الجغرافيّة، والقوالبَ النمطيّة. مع كُلّ بصمةِ عمل ، ولبنةِ نجاح، نزدادُ يقينًا بأنّ شركتنا هي شراكاتنا التي لا تنحصرُ بمكانٍ وزمن ، ومكسبنا هو أعمالنا التي لا تُقدّرُ بثمن، ودافعنا للاستمرارِ هو إيماننا بما نُقدّم، وشغفنا فيما يُنمِّي الإنسانَ ويخدم.`
                 }
     this.services=[
@@ -237,7 +236,7 @@ export default({
         'name':"البرامج التلفزيونية",
         'imgSrc':'06.png',
         'altText':'رسم يدل على شكل البامج التفزيونية',
-        'description':`نقدِّمُ لكَ أفكارًا برامجيّة حصريّة في مختلفِ المجالات( التعليم/الثقافة/الصحة/ الفن والترفيه/المسابقات) ثم نُنتجها لكَ خصيصًا بحرفيّة عالية لتظهرَ علامتكَ التجاريّة بشكلٍ لائق.`,
+        'description':`نقدِّمُ لكَ أفكارًا برامجيّة حصريّة في مختلفِ المجالات (التعليم/الثقافة/الصحة/ الفن والترفيه/المسابقات) ثم نُنتجها لكَ خصيصًا بحرفيّة عالية لتظهرَ علامتكَ التجاريّة بشكلٍ لائق.`,
         'descriptionWindow':false,
         'arrowVisible':false
       },
@@ -333,19 +332,19 @@ export default({
         'id':1,
         'name':'youtube',
         'iconClass':'fab fa-youtube',
-        'link':'https://www.youtube.com'
+        'link':'https://www.youtube.com/c/AbdulrahmanJoban'
       },
       {
         'id':2,
         'name':'facebook',
         'iconClass':'fab fa-facebook',
-        'link':'https://www.facebook.com'
+        'link':'https://www.facebook.com/abdulrahmanJoban'
       },
       {
         'id':3,
         'name':'instgram',
         'iconClass':'fab fa-instagram',
-        'link':'https://www.instagram.com'
+        'link':'https://www.instagram.com/abdulrahmanjoban'
       },
       {
         'id':4,
@@ -359,13 +358,13 @@ export default({
           'id':1,
           'name':'email',
           'iconClass':'fas fa-envelope-open-text',
-          'content':'Name.company@gmail.com'
+          'content':'smacut1@gmail.com'
         },
         {
           'id':2,
           'name':'phone',
           'iconClass':'fas fa-phone',
-          'content':'967 771385262',
+          'content':'771385262 967',
         },
         {
           'id':3,
@@ -404,98 +403,51 @@ export default({
     this.allWorks=[
       {
         'id':1,
-        'title':'pic1',
-        'imgsrc':'01',
+        'title':'وهج الحضارة',
+        'imgsrc':'01.png',
+        'altText':'صورة غلاف معبرة لفلم وهج الحضارة',
         'videoLink':'Pfrjuri7SGE'
       },
       {
         'id':2,
-        'title':'pic2',
-        'imgsrc':'02',
-        'videoLink':'Pfrjuri7SGE'
+        'title':'برومو برنامج نيل المعالي',
+        'imgsrc':'02.png',
+        'altText':'صورة غلاف معبرة لبرنامج نيل المعالي التعليمي',
+        'videoLink':'SbX3ybEMduQ'
       },
       {
         'id':3,
-        'title':'pic3',
-        'imgsrc':'03',
-        'videoLink':'Pfrjuri7SGE'
+        'title':'لقطات متنوعة من اعمال الرشيد',
+        'imgsrc':'03.png',
+        'altText':' صورة من فيديو للقطات متنوعة من اعمال مع شركة الرشيد ',
+        'videoLink':'OOHPbejhFUM'
       },
       {
         'id':4,
-        'title':'pic4',
-        'imgsrc':'04',
-        'videoLink':'Pfrjuri7SGE'
+        'title':'فلم تعريفي عن مؤسسة صلة',
+        'imgsrc':'04.png',
+        'altText':'صورة غلاف معبرة لفلم تعريفي عن مؤسسة صلة',
+        'videoLink':'Ci0QYMxFaXc'
       },
       {
         'id':5,
-        'title':'pic4',
-        'imgsrc':'05',
-        'videoLink':'Pfrjuri7SGE'
+        'title':'حكايات حضرمية | قصور تريم.. دهشة الطين',
+        'imgsrc':'05.png',
+        'altText':'صورة غلاف معبرة لفلم وهج الحضارة',
+        'videoLink':'9Ww3TDtiKig'
       },
       {
         'id':6,
         'title':'pic4',
-        'imgsrc':'06',
-        'videoLink':'LXXFNNKO_C4'
+        'imgsrc':'06.png',
+        'altText':'صورة غلاف معبرة لفلم وهج الحضارة',
+        'videoLink':'nBcDgi5R7mI'
       },
       {
         'id':7,
         'title':'pic4',
-        'imgsrc':'07',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':8,
-        'title':'pic4',
-        'imgsrc':'08',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':9,
-        'title':'pic1',
-        'imgsrc':'01',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':10,
-        'title':'pic2',
-        'imgsrc':'02',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':11,
-        'title':'pic3',
-        'imgsrc':'03',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':12,
-        'title':'pic4',
-        'imgsrc':'04',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':13,
-        'title':'pic4',
-        'imgsrc':'05',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':14,
-        'title':'pic4',
-        'imgsrc':'06',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':15,
-        'title':'pic4',
-        'imgsrc':'07',
-        'videoLink':'LXXFNNKO_C4'
-      },
-      {
-        'id':16,
-        'title':'pic4',
-        'imgsrc':'08',
+        'imgsrc':'07.png',
+        'altText':'صورة غلاف معبرة لفلم وهج الحضارة',
         'videoLink':'LXXFNNKO_C4'
       },
     ]

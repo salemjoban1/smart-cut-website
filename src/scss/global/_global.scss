@@ -6,7 +6,6 @@
     direction: rtl;
 }
 body{
-    background-color:rgb(182, 182, 182);
     font-family: Cairo, Arial, sans-serif;
     letter-spacing: -1px;
 }
@@ -25,8 +24,8 @@ $navHight:5.5rem;
 
 //mixin
 @mixin transition-ease{
-    -webkit-transition:all 0.4s ease-in-out;
-    -moz-transition:all 0.4s ease-in-out;
-    -ms-ransition:all 0.4s ease-in-out;
-    transition:all 0.4s ease-in-out;
+    -webkit-transition:all 0.5s ease-in-out;
+    -moz-transition:all 0.5s ease-in-out;
+    -ms-ransition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
 }

@@ -1,58 +1,67 @@
 <template>
   <div class="our-works">
-      <div class="container">
-          <!-- if not in mobile view -->
-          <div v-if="!mobileView">
-                <!-- loop in special array which has after 4 services one description box for them-->
-                <div class="works-group row justify-center g-3" 
-                v-for="(worksGroup,parent_index) in worksDevided" 
-                :key="parent_index"
-                v-show="currentWorksGroup === parent_index +1">
-                    <!-- loop in each object of parent array to show each work div -->
-                    <Work class="col-md-6 col-lg-4" 
-                    v-for="(work,index) in worksGroup" 
-                    :key="index" :work="work"
-                    @click="playVideo(parent_index,index)"/> <!-- enter parent index and child index to find the specific element index-->
-                    <!-- youtube player window shows when clicks video poster -->
-                    <div class="video-player"
-                        :class="{open:openPlayer}" @click="openPlayer=false">
-                        <div class="close-btn">
-                            <span></span>
-                        </div>
-                        <iframe width="100%" height="100%" :src="`https://www.youtube.com/embed/${videoInfo}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- if not in mobile view -->
+        <div v-if="!mobileView" class="container">
+            <!-- loop in special array which has after 4 services one description box for them-->
+            <div class="works-group row" 
+            v-for="(worksGroup,parent_index) in worksDevided" 
+            :key="parent_index"
+            v-show="currentWorksGroup === parent_index +1">
+                <!-- loop in each object of parent array to show each work div -->
+                <Work class="col-md-6 col-lg-4" 
+                v-for="(work,index) in worksGroup" 
+                :key="index" :work="work"
+                @click="playVideo(parent_index,index)"/> <!-- enter parent index and child index to find the specific element index-->
+                <!-- youtube player window shows when clicks video poster -->
+                <div class="video-player"
+                    :class="{open:openPlayer}" @click="openPlayer=false,videoInfo=null">
+                    <div class="close-btn">
+                        <span></span>
                     </div>
+                    <iframe width="100%" height="100%" :src="`https://www.youtube.com/embed/${videoInfo}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
-            <div v-else-if="mobileView">
-                <div class="works-group row justify-center g-3" 
-                    v-for="(work,index) in allWorks" 
+        </div>
+        <div v-else-if="mobileView" class="container">
+            <div class="works-group row" 
+                v-for="(work,index) in allWorks" 
+                :key="index"
+                v-show="mobileCurrentWorks === index +1">
+
+                <Work class="col-sm-12" 
+                      :work="work"
+                      @click="openPlayer = true"/>
+                
+                <div class="video-player"
+                    :class="{openMobile:openPlayer}" @click="openPlayer=false,videoInfo=null">
+                    <div class="close-btn">
+                        <span></span>
+                    </div>
+                    <iframe width="100%" height="100%" :src="`https://www.youtube.com/embed/${videoInfo}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="pagination">
+            <div class="right-arrow" 
+            :class="{hideArrowRight:hideArrowRight}"
+            @click="moveToRight(),changeArrowsVisibility()">
+                <span></span>
+            </div>
+            <div class="btns">
+                <div v-if="!mobileView" class="condition">
+                    <span v-for="(worksGroup,index) in worksDevided" 
                     :key="index"
-                    v-show="mobileCurrentWorks === index +1">
-                    <Work class="col-md-6 col-lg-4" :work="work"/>
+                    @click="updateCurrentGroup(index),changeArrowsVisibility()"
+                    :class="{active:currentWorksGroup === index + 1}"></span>
                 </div>
             </div>
-          <div class="pagination">
-              <div class="right-arrow" 
-              :class="{hideArrowRight:hideArrowRight}"
-              @click="moveToRight(),changeArrowsVisibility()">
-                  <span></span>
-              </div>
-              <div class="btns">
-                    <div v-if="!mobileView" class="condition">
-                        <span v-for="(worksGroup,index) in worksDevided" 
-                        :key="index"
-                        @click="updateCurrentGroup(index),changeArrowsVisibility()"
-                        :class="{active:currentWorksGroup === index + 1}" ></span>
-                    </div>
-                    
-              </div>
-              <div class="left-arrow" 
-              :class="{hideArrowLeft:hideArrowLeft}"
-              @click="moveToLeft(),changeArrowsVisibility()">
-                  <span></span>
-              </div>
-          </div>
-      </div>
+            <div class="left-arrow" 
+            :class="{hideArrowLeft:hideArrowLeft}"
+            @click="moveToLeft(),changeArrowsVisibility()">
+                <span></span>
+            </div>
+        </div>
+      
   </div>
 </template>
 
@@ -63,9 +72,9 @@ export default {
     name:'our-works',
     data(){
         return{
-            currentWorksGroup:2,
-            mobileCurrentWorks:2,
-            hideArrowRight:false,
+            currentWorksGroup:1,
+            mobileCurrentWorks:1,
+            hideArrowRight:true,
             hideArrowLeft:false,
             workGroupHeight:0,
             openPlayer:false,
@@ -122,15 +131,12 @@ export default {
             {
                 this.hideArrowLeft = false;
             }
-            if (this.currentWorksGroup === 1)
+            if ((this.currentWorksGroup === 1) || (this.mobileCurrentWorks === 1))
             {
                 this.hideArrowRight = true;
             }
-            else if(this.mobileCurrentWorks === 1)
+            else
             {
-                this.hideArrowRight = true;
-            }
-            else{
                 this.hideArrowRight = false;
             }
         },
@@ -149,7 +155,7 @@ export default {
             
         },
         moveToRight:function(){
-            if(this.hideArrowRight === true){
+            if(this.hideArrowRight){
                 return;
             }
             else if (!this.mobileView)
@@ -207,6 +213,14 @@ export default {
                     display:flex;
                     justify-content: center;
                     align-items: center;
+                    animation-duration: 0.8s;
+                    animation-name:open-player;
+                }
+                &.openMobile{
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding:25vh 2vh;
                     animation-duration: 0.8s;
                     animation-name:open-player;
                 }  

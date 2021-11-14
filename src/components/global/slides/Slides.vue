@@ -17,9 +17,8 @@
                                 <h1 class="header">{{slide.header}}</h1>
                                 <h3 class="subHeader">{{slide.subHeader}}</h3>
                                 <div v-show="slide.hasBtn && index + 1 === currentSlide">
-                                    <a >
-                                        <button class="btn-contact" 
-                                                @click="previousSlide()">
+                                    <a href="#contact" v-show="slide.hasBtn">
+                                        <button class="btn-contact" >
                                             {{slide.btn}}
                                         </button>
                                     </a>

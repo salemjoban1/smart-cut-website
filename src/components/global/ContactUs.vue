@@ -1,6 +1,6 @@
 <template>
     <div class="contact-us container">
-        <form class="form-group row g-3" @submit.prevent="sendEmail">
+        <form class="form-group row" @submit.prevent="sendEmail">
             <input type="text" class="person-name col-12 col-md-6" placeholder="الأسم" v-model="fromName" name="fromName">
 
             <input type="tel" class="mobile col-12 col-md-6" placeholder="رقم الجوال" v-model="mobile" name="mobile">
@@ -36,18 +36,19 @@ export default {
     },
     methods: {
         sendEmail: (e) => {
-            emailjs.sendForm('service_1efp16h', 'template_x0kkfjd', e.target, 'user_PgzY5Zzyu339JbOgZh8VC')
+            emailjs.sendForm('service_0irva3b', 'template_x0kkfjd', e.target, 'user_PgzY5Zzyu339JbOgZh8VC')
                 .then((result) => {
                     console.log('SUCCESS!', result.status, result.text);
                 }, (error) => {
                     console.log('FAILED...', error);
                 });
-                resetFields();
+                
         },
         formValidation:function(){
 
         },
-        resetFields:function(){
+        resetFields:function(e){
+            this.sendEmail(e);
             this.fromName = ' ';
             this.mobile = ' ';
             this.companyName = ' ';
@@ -61,20 +62,22 @@ export default {
 <style lang="scss" scoped>
 @import '../../scss/main.scss';
     .contact-us{
+        margin:0 auto;
         .form-group{
             padding:1.2rem;
             input,textarea{
                 padding:0.7rem 0.5rem;
+                margin-top:0.8rem;
                 border:0;
                 outline:0;
                 @include transition-ease;
             }
             .person-name,.mobile,.comp-name,.email{
                 background-color: #fff;
-                border-left:solid 10px $primeColor;
+                border-left:solid 0.8rem $primeColor;
             }
             textarea{
-                border-left:solid 10px $primeColor;
+                border-left:solid 0.8rem $primeColor;
             }
             input:focus{
                 

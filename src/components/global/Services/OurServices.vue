@@ -1,7 +1,7 @@
 <template>
     <div class="our-services">
-        <div class="container" id="container-service">
-            <div v-if="!mobileView" class="row g-0" id="full-content">
+        <div class="container">
+            <div v-if="!mobileView" class="row">
                 <service
                 v-for="(service,index) in servicesWithDescription" 
                 :key="index" 
@@ -10,7 +10,7 @@
                 @click="toggleDescriptionWindow(service)"
                 @close-window ="closeService()"/>
             </div>
-            <div v-else-if="mobileView" class="row g-0" id="full-content">
+            <div v-else-if="mobileView" class="row">
                 <service
                 v-for="(service,index) in servicesWithDescriptionMobile" 
                 :key="index" 
@@ -31,8 +31,8 @@ export default {
         return{  
             servicesWithDescription:[],
             servicesWithDescriptionMobile:[],
-            openedServiceIndex:null,
-            openedWindowIndex:null,
+            openedServiceIndex:0,
+            openedWindowIndex:3,
             servicesTemp:[],
             groupIdList:[],
             serviceDescription:'',
@@ -184,10 +184,17 @@ export default {
             }
         },
         closeService:function(){
-            this.servicesWithDescription[this.openedServiceIndex].arrowVisible = false;
-             this.servicesWithDescriptionMobile[this.openedServiceIndex].arrowVisible = false;
-            this.servicesWithDescription[this.openedWindowIndex].isOpen = false;
-            this.servicesWithDescriptionMobile[this.openedWindowIndex].isOpen = false;
+            if((!this.servicesWithDescription[this.openedServiceIndex].descriptionWindow)|| (!this.servicesWithDescriptionMobile[this.openedServiceIndex].descriptionWindow)){
+                 this.servicesWithDescription[this.openedServiceIndex].arrowVisible = false;
+                this.servicesWithDescriptionMobile[this.openedServiceIndex].arrowVisible = false;
+                console.log('yes');
+            }
+            if((this.servicesWithDescription[this.openedWindowIndex].descriptionWindow) || (this.servicesWithDescriptionMobile[this.openedWindowIndex].descriptionWindow))
+            {
+                this.servicesWithDescription[this.openedWindowIndex].isOpen = false;
+                this.servicesWithDescriptionMobile[this.openedWindowIndex].isOpen = false;
+                console.log('yes');
+            }
         },
         test:function(){
             console.log(this.servicesWithDescriptionMobile);
