@@ -47,10 +47,11 @@ export default {
 @import '../../../scss/main.scss';
     .service{
         // space between service boxes
-        padding:14px 0 0 14px;
+        padding:0;
         // 'relative'to move arrow besed on this div
         position:relative;
         .content-box{
+            padding:7.5px;
             .inner-content{
                 position: relative;
                 display: flex;
@@ -80,10 +81,10 @@ export default {
                     }
                 }
                 &:hover{
-                    -webkit-box-shadow: -1px 6px 9px 2px #c1c2d6;
-                    -moz-box-shadow: -1px 6px 9px 2px #c1c2d6;
-                    -ms-box-shadow: -1px 6px 9px 2px #c1c2d6;
-                    box-shadow: -1px 6px 9px 2px #c1c2d6;
+                    -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;;
+                    -moz-box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;;
+                    -ms-box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;;
+                     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
                     
                 }
                 img{
@@ -98,6 +99,7 @@ export default {
             }
         }
         .description-window{
+            margin:7.5px; 
             position: relative;
             overflow: hidden;
             display:none;
@@ -150,6 +152,7 @@ export default {
             p{
                 margin:2rem;
                 word-spacing: 3px;
+                font-size:1.2rem;
                 font-weight: 500;
             }
             &.show{

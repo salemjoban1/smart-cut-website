@@ -23,22 +23,24 @@
             </div>
         </div>
         <div v-else-if="mobileView" class="container">
-            <div class="works-group row" 
+            <div class="works-group mobile row" 
                 v-for="(work,index) in allWorks" 
                 :key="index"
                 v-show="mobileCurrentWorks === index +1">
 
-                <Work class="col-sm-12" 
+                <!-- <Work class="col-sm-12" 
                       :work="work"
-                      @click="openPlayer = true"/>
-                
-                <div class="video-player"
+                      @click="openPlayer = true"/> -->
+                <div class="col-11">
+                <iframe width="100%" height="250px" :src="`https://www.youtube.com/embed/${work.videoLink}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <!-- <div class="video-player"
                     :class="{openMobile:openPlayer}" @click="openPlayer=false,videoInfo=null">
                     <div class="close-btn">
                         <span></span>
                     </div>
                     <iframe width="100%" height="100%" :src="`https://www.youtube.com/embed/${videoInfo}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="pagination">
@@ -131,7 +133,12 @@ export default {
             {
                 this.hideArrowLeft = false;
             }
-            if ((this.currentWorksGroup === 1) || (this.mobileCurrentWorks === 1))
+
+            if ((this.currentWorksGroup === 1) && (!this.mobileView))
+            {
+                this.hideArrowRight = true;
+            }
+            else if ((this.mobileCurrentWorks === 1) && (this.mobileView))
             {
                 this.hideArrowRight = true;
             }
@@ -182,9 +189,13 @@ export default {
             }
         }
     },
+    watch:{
+        mobileView:function(val){
+            this.changeArrowsVisibility();
+        }
+    },
     mounted(){
-        this.matchGroupsHeight();
-       
+        this.matchGroupsHeight(); 
     }
 }
 </script>
@@ -192,9 +203,16 @@ export default {
 <style lang="scss" scoped>
 @import '../../../scss/main.scss';
     .our-works{
+        .container{
+            margin:0 auto;
+        }
         .works-group{
             position:relative;
             @include transition-ease;
+            &.mobile{
+                justify-content:center;
+            }
+            
             .video-player{
                 display:none;
                 position:fixed;
@@ -206,14 +224,18 @@ export default {
                 height:100vh;
                 z-index:201;
                 padding:4.5rem 4rem;
-                animation-duration: 0.8s;
-                animation-name:close-player;
                 opacity: 1;
                 &.open{
                     display:flex;
                     justify-content: center;
                     align-items: center;
+                    -webkit-animation-duration: 0.8s;
+                    -moz-animation-duration: 0.8s;
+                    -ms-animation-duration: 0.8s;
                     animation-duration: 0.8s;
+                    -webkit-animation-name:open-player;
+                    -moz-animation-name:open-player;
+                    -ms-animation-name:open-player;
                     animation-name:open-player;
                 }
                 &.openMobile{
@@ -221,7 +243,13 @@ export default {
                     justify-content: center;
                     align-items: center;
                     padding:25vh 2vh;
+                   -webkit-animation-duration: 0.8s;
+                    -moz-animation-duration: 0.8s;
+                    -ms-animation-duration: 0.8s;
                     animation-duration: 0.8s;
+                    -webkit-animation-name:open-player;
+                    -moz-animation-name:open-player;
+                    -ms-animation-name:open-player;
                     animation-name:open-player;
                 }  
                 .close-btn{
@@ -236,7 +264,10 @@ export default {
                         width:25px;
                         height:3px;
                         background-color: #fff;
-                        transform:rotate(45deg) ;
+                        -webkit-transform:rotate(45deg);
+                        -moz-transform:rotate(45deg);
+                        -ms-transform:rotate(45deg);
+                        transform:rotate(45deg);
                         &::after{
                             content:'';
                             position: absolute;
@@ -245,6 +276,9 @@ export default {
                             width:25px;
                             height:3px;
                             background-color: #fff;
+                            -webkit-transform:rotate(-90deg) translate(5px,0);
+                            -moz-transform:rotate(-90deg) translate(5px,0);
+                            -ms-transform:rotate(-90deg) translate(5px,0);
                             transform:rotate(-90deg) translate(5px,0);
                         }
                     }
@@ -278,6 +312,9 @@ export default {
                         position:absolute;
                         right:-5px;
                         top:-7px;
+                        -webkit-transform:rotate(50deg);
+                        -moz-transform:rotate(50deg);
+                        -ms-transform:rotate(50deg);
                         transform:rotate(50deg);
                         background-color: rgb(90, 89, 89);
                     }
@@ -288,6 +325,9 @@ export default {
                         position:absolute;
                         right:-5px;
                         top:9px;
+                        -webkit-transform:rotate(-50deg);
+                        -moz-transform:rotate(-50deg);
+                        -ms-transform:rotate(-50deg);
                         transform:rotate(-50deg);
                         background-color: rgb(90, 89, 89);
                     }
@@ -346,6 +386,9 @@ export default {
                         position:absolute;
                         right:-5px;
                         top:-7px;
+                        -webkit-transform:rotate(-50deg);
+                        -moz-transform:rotate(-50deg);
+                        -ms-transform:rotate(-50deg);
                         transform:rotate(-50deg);
                         background-color: rgb(90, 89, 89);
                     }
@@ -356,6 +399,9 @@ export default {
                         position:absolute;
                         right:-5px;
                         top:9px;
+                        -webkit-transform:rotate(50deg);
+                        -moz-transform:rotate(50deg);
+                        -ms-transform:rotate(50deg);
                         transform:rotate(50deg);
                         background-color: rgb(90, 89, 89);
                     }

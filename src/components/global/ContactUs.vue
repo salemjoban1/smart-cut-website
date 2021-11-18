@@ -1,7 +1,7 @@
 <template>
     <div class="contact-us container">
         <form class="form-group row" @submit.prevent="sendEmail">
-            <input type="text" class="person-name col-12 col-md-6" placeholder="الأسم" v-model="fromName" name="fromName">
+            <input type="text" class="person-name col-12 col-md-6" placeholder="الاسم" v-model="fromName" name="fromName">
 
             <input type="tel" class="mobile col-12 col-md-6" placeholder="رقم الجوال" v-model="mobile" name="mobile">
 
@@ -12,7 +12,7 @@
             <textarea type="textarea" class="desc col-md-12" cols="" rows="" placeholder="اكتب طلبك..." v-model="message" name="message">
             </textarea>
 
-            <input type="submit" value="ارسال" class="submit col-2">
+            <input type="submit" value="إرسال" class="submit col-2">
         </form>
     </div>
 </template>
@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         sendEmail: (e) => {
-            emailjs.sendForm('service_0irva3b', 'template_x0kkfjd', e.target, 'user_PgzY5Zzyu339JbOgZh8VC')
+            emailjs.sendForm('service_cgpwymg', 'template_57jj36i', e.target, 'user_ddH7gTHbjRghV9BCnUqpc')
                 .then((result) => {
                     console.log('SUCCESS!', result.status, result.text);
                 }, (error) => {
@@ -80,7 +80,6 @@ export default {
                 border-left:solid 0.8rem $primeColor;
             }
             input:focus{
-                
                 @include transition-ease;
             }
             .submit{

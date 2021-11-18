@@ -125,6 +125,9 @@ export default {
                     @include transition-ease;
                     &.active{
                         position: relative;
+                        -webkit-transform:translateX(-15px);
+                        -moz-transform:translateX(-15px);
+                        -ms-transform:translateX(-15px);
                         transform:translateX(-15px);
                         @include transition-ease;
                     }
@@ -137,7 +140,6 @@ export default {
                         height: 8px;
                         background-color: #fff;
                         @include transition-ease;
-                        // transform: translateX(-7px);
                     }       
                 }
             }
@@ -150,11 +152,9 @@ export default {
             background-position: center center;
             z-index: 3;
             height: 100%;
+            min-height:300px;
             width: 100%;
-            // background-color: #000;
-            
             .content{
-                // transform: translateY(-50%);
                 z-index:3;
                 display:flex;
                 flex-direction: column;
@@ -166,18 +166,21 @@ export default {
                 width:70%;
                 .header{
                     color:#fff;
-                    animation-delay:0.5s;
-                    animation-name:cutTextDownFromTop;
-                    animation-duration:2s;
+                    // name | duration | delay
+                    -webkit-animation:cutTextDownFromTop 2s 0.5s;
+                    -moz-animation:cutTextDownFromTop 2s 0.5s;
+                    -ms-animation:cutTextDownFromTop 2s 0.5s;
+                    animation:cutTextDownFromTop 2s 0.5s;
                 }
                 .subHeader{
                     padding:25px 0;
                     color:#fff;
                     font-size:1.5rem;
                     font-weight: normal;
-                    animation-delay:0.5s;
-                    animation-name:cutTextDownFromTop;
-                    animation-duration:2s;
+                    -webkit-animation:cutTextDownFromTop 2s 0.5s;
+                    -moz-animation:cutTextDownFromTop 2s 0.5s;
+                    -ms-animation:cutTextDownFromTop 2s 0.5s;
+                    animation:cutTextDownFromTop 2s 0.5s;
                 }
                 a{
                     width:10rem;
@@ -193,6 +196,7 @@ export default {
                     background-color:$secondColor;
                     padding:0.5rem 1.6rem;
                     cursor:pointer;
+                    // // for future updating 
                     // position:relative;
                     // &::before{
                     //     content:'';
@@ -215,6 +219,7 @@ export default {
                     // }
                 }
             }
+            // for future updating (readt filter applying to original picutres)
             .filter{
                 img{
                     // min-width:100%;
@@ -258,9 +263,15 @@ export default {
     // animation
     @keyframes cutTextDownFromTop {
     from {
+        -webkit-clip-path: inset(0 0 100% 0);
+        -moz-clip-path: inset(0 0 100% 0);
+        -ms-clip-path: inset(0 0 100% 0);
         clip-path: inset(0 0 100% 0);
     }
     to {
+        -webkit-clip-path: inset(0 0 -30% 0);
+        -moz-clip-path: inset(0 0 -30% 0);
+        -ms-clip-path: inset(0 0 -30% 0);
         clip-path: inset(0 0 -30% 0);
         opacity: 1;
     }

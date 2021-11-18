@@ -1,7 +1,7 @@
 <template>
   <div class="work">
       <div class="content">
-        <img :src="require(`../../../assets/works/${work.imgsrc}`)" alt="">
+        <img :src="require(`../../../assets/works/${work.imgsrc}`)" :alt="work.altText">
         <div class="youtube-icon">
             <div class="inner-shape"></div>
         </div>
@@ -26,9 +26,10 @@ export default {
         .content{
             position: relative;
             overflow:hidden;
-            box-shadow: 0 2px 15px rgb(85, 83, 83);
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
             img{
                 width:100%;
+                min-width:200px;
                 @include transition-ease;
             }
             .youtube-icon{
@@ -53,6 +54,9 @@ export default {
                 }
             }
             &:hover img,&:active img{
+                -webkit-transform: scale(1.2,1.2);
+                -moz-transform: scale(1.2,1.2);
+                -ms-transform: scale(1.2,1.2);
                 transform: scale(1.2,1.2);
                 cursor: pointer;
                 @include transition-ease;

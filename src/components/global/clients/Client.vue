@@ -1,7 +1,7 @@
 <template>
     <div class="client col-6 col-sm-6">
         <img :src="require(`../../../assets/clients/${client.imgsrc}`)" 
-             :alt="client.altText">
+             :alt="client.altText" :title="client.name">
     </div>
 </template>
 

@@ -5,9 +5,9 @@
                  class="row big-screen">
                 <div class="pictures col-12 col-md-4">
                     <!-- div to make border -->
-                    <div class="inner-border">
+                    <div class="inner-border" v-scrollanimation>
                         <img class="ceo-img" src="../../assets/personal-pic.png"
-                             alt="speaker image">
+                             alt="ceo image">
                         <div class="descrip">
                             <h3>عبد الرحمن جوبان</h3>
                             <h5>منتج وصانع أفلام</h5>
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="description col-12 col-md-7">
-                    <p>
+                    <p v-scrollanimation>
                         <!-- main text always be shown -->
                         {{aboutText.mainText}}
                         <!-- read more btn to show or hide complement text and hide btn itself-->
@@ -53,12 +53,11 @@
                         </span>
                     </p>
                 </div>
-                 <div class="pictures col-12 col-md-4"
-                    :style="direction">
+                 <div class="pictures col-12 col-md-4">
                     <!-- div to make border -->
                     <div class="inner-border">
                         <img class="ceo-img" src="../../assets/personal-pic.png"
-                             alt="speaker image">
+                             alt="ceo image">
                         <div class="descrip">
                             <h3>عبد الرحمن جوبان</h3>
                             <h5>منتج وصانع أفلام</h5>
@@ -106,6 +105,19 @@ export default {
                 font-weight: 400;
                 text-align: justify;
                 white-space: break-spaces;
+
+                &.before-enter{
+                    transform: translateX(-100px);
+                    opacity:0;
+                    transition:all 1s ease-in-out;
+                    // @include transition-ease
+                    }
+                &.enter{
+                    transform:translateX(0px);
+                    opacity:1;
+                    transition:all 1s ease-in-out;
+                    // @include transition-ease
+                }
             }
             .read-btn{
                 color:#012c97;
@@ -152,7 +164,20 @@ export default {
                     }
                 }
                 img{
-                    width:100%;   
+                    width:100%;
+                    min-width:180px;   
+                }
+                &.before-enter{
+                    transform: translateY(-30px);
+                    opacity:0.5;
+                    transition:all 1s ease-in-out;
+                    // @include transition-ease
+                    }
+                &.enter{
+                    transform:translateY(0px);
+                    opacity:1;
+                    transition:all 1s ease-in-out;
+                    // @include transition-ease
                 }
             }
             

@@ -1,7 +1,7 @@
 <template>
     <header class="main-headers">
-                <h1 :style="{'color':title.color}">{{title.title}}</h1>
-                <span class="under-line"></span>
+                <h1 v-scrollanimation :style="{'color':title.color}">{{title.title}}</h1>
+                <span v-scrollanimation class="under-line"></span>
     </header>
     
 </template>
@@ -28,11 +28,37 @@ export default {
         color: $primeColor;
         margin-bottom: 0.5rem;
         font-size: 40px;
+
+        &.before-enter{
+            transform: translateX(30%);
+            opacity:0.5;
+            transition:all 1s ease-in-out;
+            // @include transition-ease
+            }
+        &.enter{
+            transform:translateX(0);
+            opacity:1;
+            transition:all 1s ease-in-out;
+            // @include transition-ease
+        }
     }
     .under-line{
         width: 80px;
         height: 8px;
         background-color: $secondColor;
+
+        &.before-enter{
+            width: 40px;
+            opacity:0.5;
+            transition:all 1s ease-in-out;
+            // @include transition-ease
+            }
+        &.enter{
+            width: 80px;
+            opacity:1;
+            transition:all 1s ease-in-out;
+            // @include transition-ease
+        }
     }
     }
 </style>
