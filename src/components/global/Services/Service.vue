@@ -1,7 +1,8 @@
 <template>
     <!-- services.classType detrmine if its full page width(description window), or service box width  -->
     <div class="service"
-        :class="service.classType">
+        :class="service.classType"
+        v-scrollanimation>
         <!-- has service main contents (img-title-border) -->
         <div class="content-box" v-if ="!service.descriptionWindow" >
             <!-- 'inner-content' wrap contents in a border box and 'show' class
@@ -50,6 +51,15 @@ export default {
         padding:0;
         // 'relative'to move arrow besed on this div
         position:relative;
+        &.before-enter{
+            transform: translateY(50px);
+            opacity:0.5;
+            }
+        &.enter{
+            transform:translateY(0px);
+            opacity:1;
+            @include transition-long;
+        }
         .content-box{
             padding:7.5px;
             .inner-content{
@@ -151,7 +161,7 @@ export default {
             }
             p{
                 margin:2rem;
-                word-spacing: 3px;
+                word-spacing: 0.3rem;
                 font-size:1.2rem;
                 font-weight: 500;
             }

@@ -35,3 +35,9 @@ $navHight:5.5rem;
     -ms-ransition:all 0.5s ease-in-out;
     transition:all 0.5s ease-in-out;
 }
+@mixin transition-long{
+    -webkit-transition:all 1s ease-in-out;
+    -moz-transition:all 1s ease-in-out;
+    -ms-ransition:all 1s ease-in-out;
+    transition:all 1s ease-in-out;
+}

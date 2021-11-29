@@ -1,7 +1,7 @@
 <template>
   <div class="our-clients">
         <div class="container">
-            <div class="row g-3" >
+            <div class="row" >
                 <Client 
                 v-for="client in clients" 
                 :key="client.id" 
@@ -23,5 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+    .row{
+         justify-content: center;
+    }
 </style>

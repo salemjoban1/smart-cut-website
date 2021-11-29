@@ -17,8 +17,8 @@
     "jquery": "^3.6.0",
     "popper": "^1.0.1",
     "vue": "^3.0.0",
+    "vue-lite-youtube-embed": "^1.0.1",
     "vue-router": "^4.0.0-0",
-    "vue-youtube": "^1.4.0",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

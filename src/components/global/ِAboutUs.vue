@@ -10,7 +10,7 @@
                              alt="ceo image">
                         <div class="descrip">
                             <h3>عبد الرحمن جوبان</h3>
-                            <h5>منتج وصانع أفلام</h5>
+                            <h5>المؤسس والمدير الإبداعي</h5>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                              alt="ceo image">
                         <div class="descrip">
                             <h3>عبد الرحمن جوبان</h3>
-                            <h5>منتج وصانع أفلام</h5>
+                            <h5>المؤسس والمدير الإبداعي</h5>
                         </div>
                     </div>
                 </div>
@@ -95,6 +95,9 @@ export default {
         }
         .mobile-screen{
             justify-content:center ;
+        }
+        .container{
+            margin: 0 auto;
         }
         .description{
             overflow:hidden;
@@ -170,14 +173,11 @@ export default {
                 &.before-enter{
                     transform: translateY(-30px);
                     opacity:0.5;
-                    transition:all 1s ease-in-out;
-                    // @include transition-ease
                     }
                 &.enter{
                     transform:translateY(0px);
                     opacity:1;
-                    transition:all 1s ease-in-out;
-                    // @include transition-ease
+                     @include transition-long;
                 }
             }
             
