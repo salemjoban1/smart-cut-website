@@ -24,6 +24,5 @@ export default {
 
 <style lang="scss" scoped>
     .row{
-         justify-content: center;
     }
 </style>

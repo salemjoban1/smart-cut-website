@@ -1,15 +1,15 @@
 <template>
     <div class="contact-us container">
         <form class="form-group row" @submit.prevent="sendEmail">
-            <input type="text" class="person-name col-12 col-md-6" placeholder="الاسم" v-model="fromName" name="fromName">
+            <input type="text" class="person-name col-12 col-md-6" placeholder="الاسم" v-model="fromName" name="fromName" required>
 
             <input type="tel" class="mobile col-12 col-md-6" placeholder="رقم الجوال" v-model="mobile" name="mobile">
 
             <input type="text" class="comp-name col-12 col-md-6" placeholder="اسم الشركة" v-model="companyName" name="companyName">
 
-            <input type="email" class="email col-12 col-md-6"  placeholder="عنوان الإيميل" v-model="email" name="email">
+            <input type="email" class="email col-12 col-md-6"  placeholder="عنوان الإيميل" v-model="email" name="email" required>
 
-            <textarea type="textarea" class="desc col-md-12" cols="" rows="" placeholder="اكتب طلبك..." v-model="message" name="message">
+            <textarea type="textarea" class="desc col-md-12" cols="" rows="" placeholder="اكتب طلبك..." v-model="message" name="message" required>
             </textarea>
 
             <input type="submit" value="إرسال" class="submit col-2">

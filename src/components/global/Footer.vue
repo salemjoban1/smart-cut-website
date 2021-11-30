@@ -30,22 +30,19 @@
               <li>
                 <i :class="directContact[1].iconClass"></i>
                 <a :href="`tel:${directContact[1].number1}`">{{directContact[1].number1}}</a>
-                -
-                <a :href="`tel:${directContact[1].number2}`">{{directContact[1].number2}}</a>
-                -
-                <a :href="`tel:${directContact[1].number3}`">{{directContact[1].number3}}</a>
+
               </li>
               <li >
                 <i :class="directContact[2].iconClass"></i>
                 <span>{{directContact[2].content}}</span>
               </li>
-              <li >
+              <!-- <li >
                 <i :class="directContact[3].iconClass"></i>
                 <span>{{directContact[3].content}}</span>
-              </li>
+              </li> -->
                <li >
                 <i :class="directContact[4].iconClass">cr</i>
-                <span>عمان: {{directContact[4].content1}}</span>
+                <span>{{directContact[4].content1}}</span>
               </li>
             </ul>
         </div>
@@ -114,21 +111,25 @@ export default {
           display: inline-block;
           padding:1rem;
           li{
+            direction:ltr;
             color:#fff;
             padding-bottom: 0.8rem;
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            white-space: break-spaces;
+            // white-space: pre-line;
             i{
+              direction:ltr;
               font-size:20px;
               font-weight: bold;
               letter-spacing: 4px;
-              padding-left:0.8rem;
+              padding-right:0.8rem;
             }
             span{
               font-size:1rem;
               word-spacing: 0.3rem;
+              direction:ltr;
+              text-align:left;
             }
             a{
               text-decoration:none;

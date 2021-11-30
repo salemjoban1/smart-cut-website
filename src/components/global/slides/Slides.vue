@@ -14,8 +14,8 @@
                         <div v-show=" currentSlide === index+1" class="slide-inner"
                         :style="{'background-image':'url(' + require(`../../../assets/slides/${slide.imgsrc}.png`) + ')'}">
                             <div class="content">
-                                <h1 class="header">{{slide.header}}</h1>
-                                <h3 class="subHeader">{{slide.subHeader}}</h3>
+                                <h1 v-show="slide.hasText" class="header">{{slide.header}}</h1>
+                                <h3 v-show="slide.hasText" class="subHeader">{{slide.subHeader}}</h3>
                                 <div v-show="slide.hasBtn && index + 1 === currentSlide">
                                     <a href="#contact" v-show="slide.hasBtn">
                                         <button class="btn-contact" >
@@ -152,7 +152,7 @@ export default {
             background-position: center center;
             z-index: 3;
             height: 100%;
-            min-height:300px;
+            // min-height:300px;
             width: 100%;
             .content{
                 z-index:3;
