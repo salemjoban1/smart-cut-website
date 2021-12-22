@@ -139,7 +139,7 @@ export default({
         {
           'id':'1',
           'imgsrc':'01',
-          'header':`مرحبًا بك في شركة Smart Cut للإعلان والإنتاج الإعلامي`,
+          'header':`مرحبًا بك في شركة Smart Cut للإعلان والتسويق`,
           'subHeader':`ننتج أفضل الأعمال، بجودة وحرفيّة عالية`,
           'hasBtn':true,
           'hasText':true,
@@ -355,7 +355,7 @@ export default({
         'id':3,
         'name':'instgram',
         'iconClass':'fab fa-instagram',
-        'link':'https://www.instagram.com/abdulrahmanjoban'
+        'link':'https://instagram.com/smartcut_oman'
       },
       {
         'id':4,
@@ -444,7 +444,7 @@ export default({
         'title':'لقطات متنوعة من اعمال الرشيد',
         'imgsrc':'03.png',
         'altText':' صورة من فيديو للقطات متنوعة من اعمال مع شركة الرشيد ',
-        'videoLink':'OOHPbejhFUM'
+        'videoLink':'OOHPbejhFUM',
       },
       {
         'id':1,

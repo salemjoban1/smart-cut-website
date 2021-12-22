@@ -3,16 +3,32 @@
         <form class="form-group row" @submit.prevent="sendEmail">
             <input type="text" class="person-name col-12 col-md-6" placeholder="الاسم" v-model="fromName" name="fromName" required>
 
-            <input type="tel" class="mobile col-12 col-md-6" placeholder="رقم الجوال" v-model="mobile" name="mobile">
-
-            <input type="text" class="comp-name col-12 col-md-6" placeholder="اسم الشركة" v-model="companyName" name="companyName">
+            <input type="tel" class="mobile col-12 col-md-6" placeholder="رقم الجوال ( اختياري )" v-model="mobile" name="mobile">
 
             <input type="email" class="email col-12 col-md-6"  placeholder="عنوان الإيميل" v-model="email" name="email" required>
+            
+            <input type="text" class="comp-name col-12 col-md-6" placeholder="اسم الشركة ( اختياري )" v-model="companyName" name="companyName">
 
-            <textarea type="textarea" class="desc col-md-12" cols="" rows="" placeholder="اكتب طلبك..." v-model="message" name="message" required>
+            <textarea type="textarea" class="desc col-md-12" cols="" rows="4" placeholder="اكتب طلبك..." v-model="message" name="message" required>
             </textarea>
 
-            <input type="submit" value="إرسال" class="submit col-2">
+            <input type="submit" value="إرسال"
+                   class="submit col-2"
+                   :class="{loading:isLoading}"
+                   id="submitBtn">
+            <!-- message box showing whene click in submit btn -->
+            <div v-show="showMessage" class="send-message col-8">
+                <!-- success message showing when message seneded successufly -->
+                <div class="success" v-show="sended">
+                    <i class="far fa-check-circle"></i>
+                    <h3 >تم استلام طلبك، سيتم التواصل معك قريباً</h3>
+                </div>
+                <!-- falied message showing when message did not seneded successufly -->
+                <div class="failed" v-show="!sended">
+                    <i class="far fa-times-circle"></i>
+                    <h3>حدث خطأ اثناء الإرسال،  حاول مرة اخرى</h3>
+                </div>
+            </div>
         </form>
     </div>
 </template>
@@ -24,37 +40,73 @@ export default {
     props:{
         mobileView:Boolean
     },
-    date(){
+    data(){
         return{
             fromName:'',
             mobile:'',
             companyName:'',
             email:'',
-            message:''
+            message:'',
+            isLoading:false,
+            sended:false,
+            showMessage:false
 
         }
     },
     methods: {
-        sendEmail: (e) => {
-            emailjs.sendForm('service_cgpwymg', 'template_57jj36i', e.target, 'user_ddH7gTHbjRghV9BCnUqpc')
-                .then((result) => {
-                    console.log('SUCCESS!', result.status, result.text);
-                }, (error) => {
-                    console.log('FAILED...', error);
-                });
-                
+        sendEmail(e) {
+            this.isLoading = true;
+            this.sended = false;
+            this.showMessage = false;
+            try {
+                emailjs.sendForm('service_1efp16h', 'template_x0kkfjd', e.target,
+                'user_PgzY5Zzyu339JbOgZh8VC', {
+                fromName: this.name,
+                email:this.email,
+                message:this.message,
+                mobile: this.mobile,
+                companyName: this.companyName
+                })
+                console.log("sucess sending");
+                this.sended = true;
+                this.isLoading = false;
+                this.showMessage = true;
+                this.disableSubmit();
+            } catch(error) {
+                console.log({error})
+                this.showMessage = true;
+                this.isLoading = false;
+            }
+            // Reset form field
+                this.fromName = ''
+                this.email = ''
+                this.message = ''
+                this.mobile = ''
+                this.companyName = ''
+            },
+        disableSubmit: function(){
+            let btn = document.getElementById('submitBtn');
+            btn.disabled = true;
         },
-        formValidation:function(){
-
-        },
-        resetFields:function(e){
-            this.sendEmail(e);
-            this.fromName = ' ';
-            this.mobile = ' ';
-            this.companyName = ' ';
-            this.email = ' ';
-            this.message = ' ';
-        }
+        // sendEmail: (e) => {
+        //     emailjs.sendForm('service_1efp16h', 'template_x0kkfjd', e.target,        'user_PgzY5Zzyu339JbOgZh8VC')
+        //         .then((result) => {
+        //             console.log('SUCCESS!', result.status, result.text);
+        //             sended = true;
+        //             this.isLoading = false;
+        //             this.showMessage = true;
+        //         },(error) => {
+        //             console.log('FAILED...', error);
+        //             this.showMessage = true;
+        //             this.isLoading = false;
+        //         });
+        //         // Reset form field
+        //         this.name = '';
+        //         this.email = '';
+        //         this.message = '';
+        //         this.mobile = '';
+        //         this.companyName = '';
+        // },  
   }
 }
 </script>
@@ -65,6 +117,7 @@ export default {
         margin:0 auto;
         .form-group{
             padding:1.2rem;
+            display:flex;
             input,textarea{
                 padding:0.7rem 0.5rem;
                 margin-top:0.8rem;
@@ -84,13 +137,67 @@ export default {
             }
             .submit{
                 width:fit-content !important;
+                margin-left:0.8rem;
                 border:0;
                 background-color:$secondColor;
-                padding:0.2rem 1.4rem;
+                padding:0.3rem 1.5rem;
                 align-self: flex-start;
+                font-size:1.1rem;
+                &.loading{
+                    opacity:0.8;
+                    cursor:no-drop;
+                }
+            }
+            .send-message{
+                width:fit-content !important;
+                background-color:#fff ;
+                margin-top:0.8rem;
+                padding:0.3rem 1.2rem;
+                justify-self: center;
+                @include transition-ease;
+                -webkit-animation-duration: 0.8s;
+                -moz-animation-duration: 0.8s;
+                -ms-animation-duration: 0.8s;
+                animation-duration: 0.8s;
+                -webkit-animation-name:fade;
+                -moz-animation-name:fade;
+                -ms-animation-name:fade;
+                animation-name:fade;
+                .success{
+                    display:flex;
+                    justify-content:center;
+                    align-items: center;
+                    i{
+                        padding-left: 0.5rem;
+                        color:rgb(41, 179, 37);
+                        font-size:1.5rem;
+                    }
+                }
+                .failed{
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    i{
+                        padding-left: 0.5rem;
+                        color:rgb(255, 0, 0);
+                        font-size:1.5rem;
+                    }
+                }
+                h3{
+                    color:$primeColor;
+                    font-size:1.2rem;
+                    
+                }
             }
         }
-        
+        @keyframes fade{
+            0%{
+                opacity:0;
+            }
+            100%{
+                opacity:0.8;
+            }
+        }
     }
     
 </style>

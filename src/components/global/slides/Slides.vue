@@ -1,34 +1,32 @@
 <template>
     <div class="slides">
-        <!-- <div class="outer-width"> -->
-            <div class="pagination">
-                <span class="inner-width"  
-                    v-for="(slide,index) in slides" 
-                    :key="index"
-                    @click="switchToSlider(index + 1)">
-                    <span class="line" :class="{active:index+1 === currentSlide}"></span>
-                </span>
-            </div>
-                <Slide v-for="(slide,index) in slides" :key="index">
-                    <transition name="slide" appear>
-                        <div v-show=" currentSlide === index+1" class="slide-inner"
-                        :style="{'background-image':'url(' + require(`../../../assets/slides/${slide.imgsrc}.png`) + ')'}">
-                            <div class="content">
-                                <h1 v-show="slide.hasText" class="header">{{slide.header}}</h1>
-                                <h3 v-show="slide.hasText" class="subHeader">{{slide.subHeader}}</h3>
-                                <div v-show="slide.hasBtn && index + 1 === currentSlide">
-                                    <a href="#contact" v-show="slide.hasBtn">
-                                        <button class="btn-contact" >
-                                            {{slide.btn}}
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
+        <div class="pagination">
+            <span class="inner-width"  
+                v-for="(slide,index) in slides" 
+                :key="index"
+                @click="switchToSlider(index + 1)">
+                <span class="line" :class="{active:index+1 === currentSlide}"></span>
+            </span>
+        </div>
+        <Slide v-for="(slide,index) in slides" :key="index">
+            <transition name="slide" appear>
+                <div v-show=" currentSlide === index+1" class="slide-inner"
+                :class="{firstTransition:firstLoading}"
+                :style="{'background-image':'url(' + require(`../../../assets/slides/${slide.imgsrc}.png`) + ')'}">
+                    <div class="content">
+                        <h1 v-show="slide.hasText" class="header">{{slide.header}}</h1>
+                        <h3 v-show="slide.hasText" class="subHeader">{{slide.subHeader}}</h3>
+                        <div v-show="slide.hasBtn && index + 1 === currentSlide">
+                            <a href="#contact" v-show="slide.hasBtn">
+                                <button class="btn-contact" >
+                                    {{slide.btn}}
+                                </button>
+                            </a>
                         </div>
-                    </transition>
-                </Slide>
-            
-        <!-- </div> -->
+                    </div>
+                </div>
+            </transition>
+        </Slide>
     </div>
 </template>
 
@@ -45,7 +43,8 @@ export default {
             currentSlide:1,
             lineActive:true,
             slideInterval:null,
-            timer:7000
+            timer:7000,
+            firstLoading:true
         }
         
     },
@@ -79,6 +78,7 @@ export default {
             this.stopSlideTimer();
             this.slideInterval = setInterval(() => {
             this.nextSlide();
+            this.firstLoading = false;
         }, this.timer);
         },
         stopSlideTimer:function(){
@@ -167,20 +167,20 @@ export default {
                 .header{
                     color:#fff;
                     // name | duration | delay
-                    -webkit-animation:cutTextDownFromTop 2s 0.5s;
-                    -moz-animation:cutTextDownFromTop 2s 0.5s;
-                    -ms-animation:cutTextDownFromTop 2s 0.5s;
-                    animation:cutTextDownFromTop 2s 0.5s;
+                    -webkit-animation:cutTextDownFromTop 2s 0.4s;
+                    -moz-animation:cutTextDownFromTop 2s 0.4s;
+                    -ms-animation:cutTextDownFromTop 2s 0.4s;
+                    animation:cutTextDownFromTop 2s 0.4s;
                 }
                 .subHeader{
                     padding:25px 0;
                     color:#fff;
                     font-size:1.5rem;
                     font-weight: normal;
-                    -webkit-animation:cutTextDownFromTop 2s 0.5s;
-                    -moz-animation:cutTextDownFromTop 2s 0.5s;
-                    -ms-animation:cutTextDownFromTop 2s 0.5s;
-                    animation:cutTextDownFromTop 2s 0.5s;
+                    -webkit-animation:cutTextDownFromTop 2s 0.4s;
+                    -moz-animation:cutTextDownFromTop 2s 0.4s;
+                    -ms-animation:cutTextDownFromTop 2s 0.4s;
+                    animation:cutTextDownFromTop 2s 0.4s;
                 }
                 a{
                     width:10rem;
@@ -236,29 +236,26 @@ export default {
                     width: 100%;
                     height: 100%;
                 }
-            }
-            
+            }   
         }
         .slide-enter-active,
         .slide-leave-active{
             transition: all 1.5s ease-in-out;
         }
         .slide-enter-from{
+            &.firstTransition{
+                transform:translateX(0);
+                opacity:0
+            }
             transform:translateX(-100%);
         }
         .slide-leave-to {
-            transform:translateX(0);
-         }
-        // .fade-enter-active,
-        // .fade-leave-active{
-        //     transition: all 1.5s ease-in-out;
-        // }
-        //  .fade-enter-from{
-        //      opacity:0;
-        //  }
-        //  .fade-leave-to{
-        //      opacity: 1;
-        //  }
+            transform:translateX(0);  
+            &.firstTransition{
+                opacity:1
+            }
+        }
+        
     }
     // animation
     @keyframes cutTextDownFromTop {

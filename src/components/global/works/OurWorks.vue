@@ -14,11 +14,11 @@
                 @click="playVideo(parent_index,index)"/> <!-- enter parent index and child index to find the specific element index-->
                 <!-- youtube player window shows when clicks video poster -->
                 <div class="video-player"
-                    :class="{open:openPlayer}" @click="openPlayer=false,videoInfo=null">
+                    :class="{open:openPlayer}" @click="openPlayer=false,videoLink=null">
                     <div class="close-btn">
                         <span></span>
                     </div>
-                    <iframe width="100%" height="100%" :src="`https://www.youtube.com/embed/${videoInfo}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="100%" height="100%" :src="`https://www.youtube.com/embed/${videoLink}`" :title="videoTitle" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -27,12 +27,10 @@
                 v-for="(work,index) in allWorks" 
                 :key="index"
                 v-show="mobileCurrentWorks === index +1">
-
-                <!-- <Work class="col-sm-12" 
-                      :work="work"
-                      @click="openPlayer = true"/> -->
+                
                 <div class="col-11">
-                <iframe width="100%" height="250px" :src="`https://www.youtube.com/embed/${work.videoLink}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <!-- <iframe width="100%" height="250px" :src="`https://www.youtube.com/embed/${work.videoLink}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                <AsyncYoutube :work="work" height="250px"/>
                 </div>
                 <!-- <div class="video-player"
                     :class="{openMobile:openPlayer}" @click="openPlayer=false,videoInfo=null">
@@ -68,7 +66,9 @@
 </template>
 
 <script>
+import {defineAsyncComponent} from "vue";
 import Work from './Work.vue';
+const AsyncYoutube = defineAsyncComponent(() =>  import('@/components/global/works/Youtube.vue') /*webpackChunkName: "works" */ );
 
 export default {
     name:'our-works',
@@ -80,7 +80,10 @@ export default {
             hideArrowLeft:false,
             workGroupHeight:0,
             openPlayer:false,
-            videoInfo:null,
+            // store video link from clicked object
+            videoLink:null,
+            // store video title from clicked object
+            videoTitle:null,
         }
     },
     props:{
@@ -89,7 +92,8 @@ export default {
         mobileView:Boolean
         },
     components:{
-        Work
+        Work,
+        AsyncYoutube
     },
     methods:{
         matchGroupsHeight:function(){
@@ -182,8 +186,8 @@ export default {
                     if ((parent_index === i) && (index === j))
                     {
                         this.openPlayer = !this.openPlayer;
-                        this.videoInfo = this.worksDevided[i][j].videoLink;
-                        console.log(videoInfo);
+                        this.videoLink = this.worksDevided[i][j].videoLink;
+                        this.videoTitle = this.worksDevided[i][j].title;
                     }
                 }
             }
