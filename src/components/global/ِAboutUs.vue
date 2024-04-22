@@ -1,10 +1,10 @@
 <template>
     <section class="about-us">
         <div class="container">
-            <div v-if="!mobileView"
+           <!-- <div v-if="!mobileView"
                  class="row big-screen">
-                <div class="pictures col-12 col-md-4">
-                    <!-- div to make border -->
+                 <div class="pictures col-12 col-md-4">
+                    div to make border
                     <div class="inner-border" v-scrollanimation>
                         <img class="ceo-img" src="../../assets/personal-pic.png"
                              alt="ceo image">
@@ -13,29 +13,28 @@
                             <h5>المؤسس والمدير الإبداعي</h5>
                         </div>
                     </div>
-                </div>
-                <div class="description col-12 col-md-7">
+                </div>  
+                <div class="description col-md-12">
                     <p v-scrollanimation>
-                        <!-- main text always be shown -->
+                        main text always be shown
                         {{aboutText.mainText}}
-                        <!-- read more btn to show or hide complement text and hide btn itself-->
+                        read more btn to show or hide complement text and hide btn itself
                         <span class="read-btn more"
                             :class="{show:readMore}"
                             @click="readMore=!readMore,readLess=!readLess">عرض أكثر</span>
-                        <!-- complement text -->
+                        complement text
                         <span class="less" :class="{show:readLess}">
                             {{aboutText.textMore}}
-                            <!-- less btn to show hide complement text and hide btn itself -->
+                            less btn to show hide complement text and hide btn itself
                             <span class="read-btn less"
                             :class="{show:readLess}" 
                             @click="readMore=!readMore,readLess=!readLess">عرض أقل</span>
                         </span>
                     </p>
                 </div>
-            </div>
-            <div v-else-if="mobileView"
-                 class="row mobile-screen">
-                <div class="description col-12 col-md-7">
+            </div>-->
+            <div class="row mobile-screen">
+                <div class="description col-md-12">
                     <p>
                         <!-- main text always be shown -->
                         {{aboutText.mainText}}
@@ -53,8 +52,12 @@
                         </span>
                     </p>
                 </div>
-                 <div class="pictures col-12 col-md-4">
-                    <!-- div to make border -->
+                <div class="descrip-text">
+                    <h3>عبد الرحمن جوبان</h3>
+                    <h5>المؤسس والمدير الإبداعي</h5>
+                </div>
+                 <!-- <div class="pictures col-12 col-md-4">
+                    div to make border
                     <div class="inner-border">
                         <img class="ceo-img" src="../../assets/personal-pic.png"
                              alt="ceo image">
@@ -63,7 +66,7 @@
                             <h5>المؤسس والمدير الإبداعي</h5>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -143,6 +146,19 @@ export default {
                         display: inline;
                     }
                 }   
+        }
+        .descrip-text {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            padding-left: 3rem;
+            h3 {
+                font-size:1.6rem;
+                padding-bottom: 0.5rem;
+            }
+            h5 {
+                font-size: 1.1rem
+            }
         }
         .pictures{
             padding:2.5rem 1rem 0 1rem;
