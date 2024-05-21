@@ -11,12 +11,12 @@
             </div>
             <!-- menu nav to navigate to any part of page, it shows in big screens -->
             <ul class="nav-menu d-md-flex" :class="{active:isSelected}">
-                <li><a href="#" @click="hideOnClick">الرئيسية</a></li>
-                <li><a href="#about-us" @click="hideOnClick">من نحن</a></li>
-                <li><a href="#services" @click="hideOnClick">خدماتنا</a></li>
-                <li><a href="#works" @click="hideOnClick">أعمالنا</a></li>
-                <li><a href="#clients" @click="hideOnClick">عملاؤنا</a></li>
-                <li><a href="#contact" @click="hideOnClick">تواصل معنا</a></li>
+                <li><a href="#" @click="hideOnClick">Home</a></li>
+                <li><a href="#about-us" @click="hideOnClick">About Us</a></li>
+                <li><a href="#services" @click="hideOnClick">Services</a></li>
+                <li><a href="#works" @click="hideOnClick">Our Works</a></li>
+                <li><a href="#clients" @click="hideOnClick">Our Clients</a></li>
+                <li><a href="#contact" @click="hideOnClick">Contact Us</a></li>
             </ul>
             <!-- block contain logo pic with link to the main page -->
             <div class="logo">
@@ -65,7 +65,7 @@ export default({
         height:$navHight;
         .inner-width{
             display:flex;
-            justify-content: space-between; //making equal spaces between nav items
+            justify-content: flex-end; //making equal spaces between nav items
             align-items: center;
             .menu-toggle{
                 z-index:4;
