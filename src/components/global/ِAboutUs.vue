@@ -41,20 +41,20 @@
                         <!-- read more btn to show or hide complement text and hide btn itself-->
                         <span class="read-btn more"
                             :class="{show:readMore}"
-                            @click="readMore=!readMore,readLess=!readLess"> عرض أكثر</span>
+                            @click="readMore=!readMore,readLess=!readLess">Show more</span>
                         <!-- complement text -->
                         <span class="less" :class="{show:readLess}">
                             {{aboutText.textMore}}
                             <!-- less btn to show hide complement text and hide btn itself -->
                             <span class="read-btn less"
                             :class="{show:readLess}" 
-                            @click="readMore=!readMore,readLess=!readLess">عرض أقل</span>
-                        </span>
+                            @click="readMore=!readMore,readLess=!readLess">Show less</span>
+                      </span>
                     </p>
                 </div>
                 <div class="descrip-text">
-                    <h3>عبد الرحمن جوبان</h3>
-                    <h5>المؤسس والمدير الإبداعي</h5>
+                    <h3>Abdulrahman Joban</h3>
+                    <h5>Founder | Creative Director</h5>
                 </div>
                  <!-- <div class="pictures col-12 col-md-4">
                     div to make border
