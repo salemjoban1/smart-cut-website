@@ -3,23 +3,6 @@
     <div class="container">
       <div class="footer-content row">
         <!-- every part take have of the page -->
-        <div class="social-logo col-md-6">
-            <!-- 'col' to justify the inner content as tow parts -->
-            <ul class="col ">
-              <!-- take data from object ,and repeat as many items in the object -->
-              <li v-for="tool in socialMedia" :key="tool.id">
-                <a :href="tool.link" target="_blank">
-                  <i :class="tool.iconClass"></i>
-                </a>
-              </li>
-            </ul>
-            <div class="logo col">
-                  <a href="#">
-                    <img :src="require(`../../assets/${logo.imgWhiteSrc}`)" 
-                         :alt="logo.altText">
-                  </a>
-            </div>
-        </div>
         <div class="direct-contact col-md-6 ">
             <ul>
               <!-- take data from object ,and repeat as many items in the object -->
@@ -46,9 +29,26 @@
               </li>
             </ul>
         </div>
+        <div class="social-logo col-md-6">
+            <!-- 'col' to justify the inner content as tow parts -->
+            <ul class="col ">
+              <!-- take data from object ,and repeat as many items in the object -->
+              <li v-for="tool in socialMedia" :key="tool.id">
+                <a :href="tool.link" target="_blank">
+                  <i :class="tool.iconClass"></i>
+                </a>
+              </li>
+            </ul>
+            <div class="logo col">
+                  <a href="#">
+                    <img :src="require(`../../assets/${logo.imgWhiteSrc}`)" 
+                         :alt="logo.altText">
+                  </a>
+            </div>
+        </div>
       </div>
       <!-- copy rights part take the whole width ,and centered  -->
-      <div class="copyRight"> <p>Smart Cut - 2021 &copy;</p></div>
+      <div class="copyRight"> <p>Smart Cut - 2024 &copy;</p></div>
     </div>
   </div>
 </template>
