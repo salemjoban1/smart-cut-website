@@ -138,6 +138,7 @@ export default {
                         display: inline-block;
                         width:15px;
                         height:2px;
+                        margin-right: 5px;
                         background-color: #fff;
                         -webkit-transform:rotate(45deg);
                         -moz-transform:rotate(45deg) ;

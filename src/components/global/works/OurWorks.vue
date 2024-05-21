@@ -314,12 +314,19 @@ export default {
                         width:22px;
                         height:2.5px;
                         position:absolute;
+                        // right:-5px;
+                        // top:-7px;
+                        // -webkit-transform:rotate(50deg);
+                        // -moz-transform:rotate(50deg);
+                        // -ms-transform:rotate(50deg);
+                        // transform:rotate(50deg);
+                        
                         right:-5px;
                         top:-7px;
-                        -webkit-transform:rotate(50deg);
-                        -moz-transform:rotate(50deg);
-                        -ms-transform:rotate(50deg);
-                        transform:rotate(50deg);
+                        -webkit-transform:rotate(-50deg);
+                        -moz-transform:rotate(-50deg);
+                        -ms-transform:rotate(-50deg);
+                        transform:rotate(-50deg);
                         background-color: rgb(90, 89, 89);
                     }
                     &::after{
@@ -327,12 +334,19 @@ export default {
                         width:22px;
                         height:2.5px;
                         position:absolute;
+                        // right:-5px;
+                        // top:9px;
+                        // -webkit-transform:rotate(-50deg);
+                        // -moz-transform:rotate(-50deg);
+                        // -ms-transform:rotate(-50deg);
+                        // transform:rotate(-50deg);
+                        // background-color: rgb(90, 89, 89);
                         right:-5px;
                         top:9px;
-                        -webkit-transform:rotate(-50deg);
-                        -moz-transform:rotate(-50deg);
-                        -ms-transform:rotate(-50deg);
-                        transform:rotate(-50deg);
+                        -webkit-transform:rotate(50deg);
+                        -moz-transform:rotate(50deg);
+                        -ms-transform:rotate(50deg);
+                        transform:rotate(50deg);
                         background-color: rgb(90, 89, 89);
                     }
                 }
@@ -388,12 +402,18 @@ export default {
                         width:22px;
                         height:2.5px;
                         position:absolute;
+                        // right:-5px;
+                        // top:-7px;
+                        // -webkit-transform:rotate(-50deg);
+                        // -moz-transform:rotate(-50deg);
+                        // -ms-transform:rotate(-50deg);
+                        // transform:rotate(-50deg);
                         right:-5px;
                         top:-7px;
-                        -webkit-transform:rotate(-50deg);
-                        -moz-transform:rotate(-50deg);
-                        -ms-transform:rotate(-50deg);
-                        transform:rotate(-50deg);
+                        -webkit-transform:rotate(50deg);
+                        -moz-transform:rotate(50deg);
+                        -ms-transform:rotate(50deg);
+                        transform:rotate(50deg);
                         background-color: rgb(90, 89, 89);
                     }
                     &::after{
@@ -401,13 +421,20 @@ export default {
                         width:22px;
                         height:2.5px;
                         position:absolute;
+                        // right:-5px;
+                        // top:9px;
+                        // -webkit-transform:rotate(50deg);
+                        // -moz-transform:rotate(50deg);
+                        // -ms-transform:rotate(50deg);
+                        // transform:rotate(50deg);
                         right:-5px;
                         top:9px;
-                        -webkit-transform:rotate(50deg);
-                        -moz-transform:rotate(50deg);
-                        -ms-transform:rotate(50deg);
-                        transform:rotate(50deg);
+                        -webkit-transform:rotate(-50deg);
+                        -moz-transform:rotate(-50deg);
+                        -ms-transform:rotate(-50deg);
+                        transform:rotate(-50deg);
                         background-color: rgb(90, 89, 89);
+                        
                     }
                 }
 
