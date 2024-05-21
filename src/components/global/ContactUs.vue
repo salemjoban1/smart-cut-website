@@ -1,18 +1,18 @@
 <template>
     <div class="contact-us container">
         <form class="form-group row" @submit.prevent="sendEmail">
-            <input type="text" class="person-name col-12 col-md-6" placeholder="الاسم" v-model="fromName" name="fromName" required>
+            <input type="text" class="person-name col-12 col-md-6" placeholder="name" v-model="fromName" name="fromName" required>
 
-            <input type="tel" class="mobile col-12 col-md-6" placeholder="رقم الجوال ( اختياري )" v-model="mobile" name="mobile">
+            <input type="tel" class="mobile col-12 col-md-6" placeholder="Phone Number (optional)" v-model="mobile" name="mobile">
 
-            <input type="email" class="email col-12 col-md-6"  placeholder="عنوان الإيميل" v-model="email" name="email" required>
+            <input type="email" class="email col-12 col-md-6"  placeholder="Email Address" v-model="email" name="email" required>
             
-            <input type="text" class="comp-name col-12 col-md-6" placeholder="اسم الشركة ( اختياري )" v-model="companyName" name="companyName">
+            <input type="text" class="comp-name col-12 col-md-6" placeholder="Company Name (optional)" v-model="companyName" name="companyName">
 
-            <textarea type="textarea" class="desc col-md-12" cols="" rows="4" placeholder="اكتب طلبك..." v-model="message" name="message" required>
+            <textarea type="textarea" class="desc col-md-12" cols="" rows="4" placeholder=" Write Your Request..." v-model="message" name="message" required>
             </textarea>
 
-            <input type="submit" value="إرسال"
+            <input type="submit" value="Send"
                    class="submit col-2"
                    :class="{loading:isLoading}"
                    id="submitBtn">
@@ -21,12 +21,12 @@
                 <!-- success message showing when message seneded successufly -->
                 <div class="success" v-show="sended">
                     <i class="far fa-check-circle"></i>
-                    <h3 >تم استلام طلبك، سيتم التواصل معك قريباً</h3>
+                    <h3>Your Request Has Been Received, We Will Contact With You soon</h3>
                 </div>
                 <!-- falied message showing when message did not seneded successufly -->
                 <div class="failed" v-show="!sended">
                     <i class="far fa-times-circle"></i>
-                    <h3>حدث خطأ اثناء الإرسال،  حاول مرة اخرى</h3>
+                    <h3>Error While Sending, Please Try Again</h3>
                 </div>
             </div>
         </form>
